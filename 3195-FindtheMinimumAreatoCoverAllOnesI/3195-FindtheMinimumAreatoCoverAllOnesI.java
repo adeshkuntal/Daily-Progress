@@ -1,20 +1,25 @@
-// Last updated: 8/22/2025, 10:53:07 AM
+// Last updated: 8/22/2025, 10:54:37 AM
 class Solution {
     public int minimumArea(int[][] grid) {
-        int minRow = grid.length, maxRow = -1;
-        int minCol = grid[0].length, maxCol = -1;
+        int row = grid.length;
+        int col = grid[0].length;
 
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
+        int top = row;
+        int left = col;
+        int bottom = -1;
+        int right = -1;
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
                 if (grid[i][j] == 1) {
-                    minRow = Math.min(minRow, i);
-                    maxRow = Math.max(maxRow, i);
-                    minCol = Math.min(minCol, j);
-                    maxCol = Math.max(maxCol, j);
+                    top = Math.min(top, i);
+                    bottom = Math.max(bottom, i);
+                    left = Math.min(left, j);
+                    right = Math.max(right, j);
                 }
             }
         }
 
-        return (maxRow - minRow + 1) * (maxCol - minCol + 1);
+        return (bottom - top + 1) * (right - left + 1);
     }
 }
