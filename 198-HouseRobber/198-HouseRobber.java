@@ -1,5 +1,4 @@
-// Last updated: 9/3/2025, 11:33:37 AM
-import java.util.*;
+// Last updated: 9/3/2025, 11:33:47 AM
 class Solution {
     public int rob(int[] nums) {
         int[] dp = new int[nums.length];
