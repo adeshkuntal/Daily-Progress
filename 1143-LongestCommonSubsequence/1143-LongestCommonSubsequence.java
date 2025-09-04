@@ -1,28 +1,49 @@
-// Last updated: 9/4/2025, 10:56:13 AM
+// Last updated: 9/4/2025, 11:09:50 AM
 class Solution {
     public int longestCommonSubsequence(String text1, String text2) {
-        int len1 = text1.length();
-        int len2 = text2.length();
-        int[][] dp = new int[len1+1][len2+1];
-        
-        for(int i=0; i<=len1; i++) {
-            dp[i][0] = 0;
-        }
-        
-        for(int i=0; i<=len2; i++) {
-            dp[0][i] = 0;
-        }
-        
-        for(int i=1; i<=len1; i++) {
-            for(int j=1; j<=len2; j++) {
-                if(text1.charAt(i-1) == text2.charAt(j-1)) {
-                    dp[i][j] = 1 + dp[i-1][j-1];
-                } else {
-                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+        // int[][] dp = new int[text1.length()][text2.length()];
+        // for(int[] a : dp) {
+        //     Arrays.fill(a, -1);
+        // }
+        // return LCS(text1, text2, 0, 0, dp);
+        return LCSBU(text1, text2);
+    }
+
+    // public int LCS(String s1, String s2, int i, int j, int[][] dp) {
+    //     if(i == s1.length() || j == s2.length()) {
+    //         return 0;
+    //     }
+    //     if(dp[i][j] != -1) {
+    //         return dp[i][j];
+    //     }
+    //     // int ans = 0;
+    //     if(s1.charAt(i) == s2.charAt(j)) {
+    //         dp[i][j] = 1 + LCS(s1, s2, i + 1, j + 1, dp);
+    //     }else {
+    //         int f = LCS(s1, s2, i + 1, j, dp);
+    //         int s = LCS(s1, s2, i, j + 1, dp);
+    //         dp[i][j] = Math.max(f, s);
+    //     }
+
+    //     return dp[i][j];
+    // }
+
+    public int LCSBU(String s1, String s2) {
+        int[][] dp = new int[s1.length() + 1][s2.length() + 1];
+        for(int i = 1; i <dp.length; i++) {
+            for(int j = 1; j < dp[0].length; j++) {
+                int ans = 0;
+                if(s1.charAt(i-1) == s2.charAt(j-1)) {
+                    ans = 1 + dp[i - 1][j - 1];
+                }else {
+                    int f = dp[i - 1][j];
+                    int s = dp[i][j - 1];
+                    ans = Math.max(f, s);
                 }
+
+                dp[i][j] = ans;
             }
         }
-        
-        return dp[len1][len2];
+        return dp[dp.length - 1][dp[0].length - 1];
     }
 }
