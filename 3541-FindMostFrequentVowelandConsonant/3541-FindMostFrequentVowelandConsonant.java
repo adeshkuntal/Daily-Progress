@@ -1,24 +1,22 @@
-// Last updated: 9/13/2025, 11:24:27 AM
+// Last updated: 9/13/2025, 12:03:41 PM
 class Solution {
     public int maxFreqSum(String s) {
-        int[] freq = new int[26];
+        HashMap<Character, Integer> map = new HashMap<>();
+        int vowel = 0;
+        int cons = 0;
         for (char ch : s.toCharArray()) {
-            freq[ch - 'a']++;
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
         }
-
-        int maxVowel = 0;
-        int maxConsonant = 0;
-
-        for (int i = 0; i < 26; i++) {
-            char ch = (char)(i + 'a');
-            if (isVowel(ch)) {
-                maxVowel = Math.max(maxVowel, freq[i]);
-            } else {
-                maxConsonant = Math.max(maxConsonant, freq[i]);
+        for (char ch : s.toCharArray()) {
+            if(isVowel(ch)){
+                vowel = Math.max(vowel,map.get(ch));
+            }
+            else{
+                cons = Math.max(cons,map.get(ch));
             }
         }
 
-        return maxVowel + maxConsonant;
+        return vowel+cons;
     }
 
     private static boolean isVowel(char ch) {
