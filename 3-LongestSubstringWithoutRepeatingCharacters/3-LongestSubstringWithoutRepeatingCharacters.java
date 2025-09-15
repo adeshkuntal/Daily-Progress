@@ -1,7 +1,23 @@
-// Last updated: 9/15/2025, 7:09:50 PM
+// Last updated: 9/15/2025, 7:25:10 PM
 class Solution {
     public int lengthOfLongestSubstring(String s) {
+        // Set<Character> set = new HashSet<>();
+        // int maxLen = 0;
+        // int left = 0;
+
+        // for (int right = 0; right < s.length(); right++) {
+        //     while (set.contains(s.charAt(right))) {
+        //         set.remove(s.charAt(left));
+        //         left++;
+        //     }
+        //     set.add(s.charAt(right));
+        //     maxLen = Math.max(maxLen, right - left + 1);
+        // }
+
+        // return maxLen;
+
         int count = 0;
+
         for (int i = 0; i < s.length(); i++) {
             HashSet<Character> set = new HashSet<>();
             for (int j = i; j < s.length(); j++) {
@@ -10,20 +26,12 @@ class Solution {
                     break;
                 }
                 set.add(c);
-                count = Math.max(count, j - i + 1);
+                count = Math.max(count, set.size());
             }
         }
+
         return count;
+
     }
 
-    private boolean isUniqueCharacter(String s) {
-        HashSet<Character> set = new HashSet<>();
-        for (char c : s.toCharArray()) {
-            if (set.contains(c)) {
-                return false;
-            }
-            set.add(c);
-        }
-        return true;
-    }
 }
