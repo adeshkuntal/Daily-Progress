@@ -1,4 +1,4 @@
-// Last updated: 9/26/2025, 9:34:05 PM
+// Last updated: 9/26/2025, 9:46:00 PM
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
