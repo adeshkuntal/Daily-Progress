@@ -1,4 +1,4 @@
-// Last updated: 9/26/2025, 7:38:39 PM
+// Last updated: 9/26/2025, 8:00:14 PM
 import java.util.*;
 
 class Solution {
@@ -20,8 +20,12 @@ class Solution {
                     left++;
                     right--;
                     
-                    while (left < right && nums[left] == nums[left - 1]) left++;
-                    while (left < right && nums[right] == nums[right + 1]) right--;
+                    while (left < right && nums[left] == nums[left - 1]){
+                        left++;
+                    }
+                    while (left < right && nums[right] == nums[right + 1]){
+                        right--;
+                    }
                 } 
                 else if (sum < 0) {
                     left++;
