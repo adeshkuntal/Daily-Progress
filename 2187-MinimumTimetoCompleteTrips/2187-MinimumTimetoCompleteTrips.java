@@ -1,4 +1,4 @@
-// Last updated: 9/26/2025, 11:11:00 PM
+// Last updated: 9/26/2025, 11:13:09 PM
 class Solution {
     public long minimumTime(int[] time, int totalTrips) {
         Arrays.sort(time);
