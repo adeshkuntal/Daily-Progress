@@ -1,4 +1,4 @@
-// Last updated: 9/26/2025, 8:32:14 PM
+// Last updated: 9/26/2025, 8:34:08 PM
 class Solution {
     public int findJudge(int n, int[][] trust) {
         if (n == 1 && trust.length == 0){
@@ -12,7 +12,7 @@ class Solution {
         }
         for (int i = 1; i <= n; i++) {
             if (t_Scores[i] == n - 1){
-                return i;
+                return i; 
             }
         }
 
