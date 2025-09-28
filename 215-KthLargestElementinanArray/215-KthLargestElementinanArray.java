@@ -1,4 +1,4 @@
-// Last updated: 9/28/2025, 8:19:27 PM
+// Last updated: 9/28/2025, 8:19:56 PM
 class Solution {
     public int findKthLargest(int[] nums, int k) {
         int low = Integer.MAX_VALUE;
@@ -10,7 +10,7 @@ class Solution {
         }
 
         while (low <= high) {
-            int mid = (low + high) / 2;
+            int mid = low + (high - low) / 2;
             int count = 0;
 
             for (int n : nums) {
