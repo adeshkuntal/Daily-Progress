@@ -1,27 +1,25 @@
-// Last updated: 8/4/2025, 6:57:41 PM
+// Last updated: 9/28/2025, 7:36:25 PM
 class Solution {
-    public void merge(int[] arr1, int n, int[] arr2, int m) {
-        int i = n - 1;  // Last valid element in arr1
-        int j = m - 1;  // Last element in arr2
-        int k = n + m - 1; // Last index of arr1 after merging
-
-        // Merge from the end to avoid overwriting arr1's values
-        while (i >= 0 && j >= 0) {
-            if (arr1[i] > arr2[j]) {
-                arr1[k] = arr1[i];
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int idx = m+n-1;
+        int i = m-1;
+        int j = n-1;
+        while(i>=0 && j>=0){
+            if(nums1[i] >= nums2[j]){
+                nums1[idx] = nums1[i];
+                idx--;
                 i--;
-            } else {
-                arr1[k] = arr2[j];
+            }
+            else{
+                nums1[idx] = nums2[j];
+                idx--;
                 j--;
             }
-            k--;
         }
-
-        // If arr2 still has elements left, copy them (arr1's elements are already in place)
-        while (j >= 0) {
-            arr1[k] = arr2[j];
+        while(j>=0){
+            nums1[idx] = nums2[j];
+            idx--;
             j--;
-            k--;
         }
     }
 }
