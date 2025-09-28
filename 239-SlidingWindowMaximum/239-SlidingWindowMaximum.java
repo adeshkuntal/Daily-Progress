@@ -1,30 +1,39 @@
-// Last updated: 9/27/2025, 9:00:03 PM
+// Last updated: 9/28/2025, 1:33:26 PM
 import java.util.*;
 
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
         int n = nums.length;
-        if (n == 0 || k == 0) {
-            return new int[0];
-        }
+        Deque<Integer> dq = new ArrayDeque<>();
+        List<Integer> res = new ArrayList<>();
 
-        int numOfWindow = n - k + 1;
-        int[] result = new int[numOfWindow];
-        Deque<Integer> dq = new LinkedList<>();
-
-        for (int i = 0; i < n; i++) {
-            if (!dq.isEmpty() && dq.peekFirst() <= i - k) {
-                dq.pollFirst();
-            }
+        for (int i = 0; i < k; i++) {
             while (!dq.isEmpty() && nums[dq.peekLast()] <= nums[i]) {
                 dq.pollLast();
             }
-            dq.offerLast(i);
-            if (i >= k - 1) {
-                result[i - k + 1] = nums[dq.peekFirst()];
-            }
+            dq.addLast(i);
         }
 
-        return result;
+        for (int i = k; i < n; i++) {
+            res.add(nums[dq.peekFirst()]);
+
+            while (!dq.isEmpty() && dq.peekFirst() <= i - k) {
+                dq.pollFirst();
+            }
+
+            while (!dq.isEmpty() && nums[dq.peekLast()] <= nums[i]) {
+                dq.pollLast();
+            }
+
+            dq.addLast(i);
+        }
+
+        res.add(nums[dq.peekFirst()]);
+
+        int[] ans = new int[res.size()];
+        for (int i = 0; i < res.size(); i++) {
+            ans[i] = res.get(i);
+        }
+        return ans;
     }
 }
