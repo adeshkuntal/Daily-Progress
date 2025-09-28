@@ -1,10 +1,21 @@
-// Last updated: 8/4/2025, 6:55:43 PM
+// Last updated: 9/28/2025, 8:35:25 PM
 class Solution {
     public boolean isPerfectSquare(int num) {
-        if (num < 0) {
-            return false;
+        int low = 1;
+        int high = num;
+        while(low <= high){
+            long mid = low + (high - low)/2;
+            long sq = mid * mid;
+            if(sq == num){
+                return true;
+            }
+            else if(sq < num){
+                low = (int)mid + 1;
+            }
+            else{
+                high = (int)mid - 1;
+            }
         }
-        int sqrt = (int) Math.sqrt(num);
-        return (sqrt * sqrt == num);
+        return false;
     }
 }
