@@ -1,4 +1,4 @@
-// Last updated: 8/4/2025, 6:58:11 PM
+// Last updated: 9/29/2025, 1:33:10 PM
 class Solution {
     public void rotate(int[][] matrix) {
         int n = matrix.length;
@@ -12,7 +12,8 @@ class Solution {
         }
 
         for (int i = 0; i < n; i++) {
-            int left = 0, right = n - 1;
+            int left = 0;
+            int right = n-1;
             while (left < right) {
                 int temp = matrix[i][left];
                 matrix[i][left] = matrix[i][right];
