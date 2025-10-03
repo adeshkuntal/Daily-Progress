@@ -1,20 +1,26 @@
-// Last updated: 8/4/2025, 6:57:49 PM
+// Last updated: 10/3/2025, 9:21:49 PM
 class Solution {
+    static List<List<Integer>> result = new ArrayList<>();
+    
     public List<List<Integer>> combine(int n, int k) {
-        List<List<Integer>> result = new ArrayList<>();
-        backtrack(result, new ArrayList<>(), n, k, 1);
+        result.clear();
+        List<Integer> temp = new ArrayList<>();
+        helper(n, k, 1, temp);
         return result;
     }
 
-    private static void backtrack(List<List<Integer>> result, List<Integer> tempList, int n, int k, int start) {
-        if (tempList.size() == k) {
-            result.add(new ArrayList<>(tempList));
+    private void helper(int n, int k, int idx, List<Integer> list) {
+        if (k == 0) {
+            result.add(new ArrayList<>(list));
             return;
         }
-        for (int i = start; i <= n; i++) {
-            tempList.add(i);
-            backtrack(result, tempList, n, k, i + 1);
-            tempList.remove(tempList.size() - 1);
-        } 
+        if (idx > n) {
+            return;
+        }
+        for (int i = idx; i <= n; i++) {
+            list.add(i);
+            helper(n, k - 1, i + 1, list);
+            list.remove(list.size() - 1); 
+        }
     }
 }
