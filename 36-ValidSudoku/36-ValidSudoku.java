@@ -1,24 +1,42 @@
-// Last updated: 8/30/2025, 12:43:41 PM
+// Last updated: 10/4/2025, 8:26:36 PM
+import java.util.*;
+
 class Solution {
     public boolean isValidSudoku(char[][] board) {
-       boolean[][] rows = new boolean[9][9];
-        boolean[][] cols = new boolean[9][9];
-        boolean[][] boxes = new boolean[9][9];
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                char c = board[i][j];
-                if (c == '.') continue;
-                int d = c - '1';
-                if (rows[i][d]) return false;
-                rows[i][d] = true;
-                if (cols[j][d]) return false;
-                cols[j][d] = true;
-                int b = (i / 3) * 3 + (j / 3);
-                if (boxes[b][d]) return false;
-                boxes[b][d] = true;
+        for(int i=0; i<board.length; i+=3){
+            for(int j=0; j<board[0].length; j+=3){
+                int row = i;
+                int col = j;
+                HashSet<Character> set = new HashSet<>();
+                while(row < i+3){
+                    char ch = board[row][col];
+                    if(ch != '.'){
+                        if(set.contains(ch)){
+                            return false;
+                        }
+                        set.add(ch);
+                        boolean flag = dfs(board,ch,row,col);
+                        if(!flag){
+                            return false;
+                        }
+                    }
+                    col++;
+                    if(col == j+3){
+                        col = j;
+                        row++;
+                    }
+                }
+                set.clear();
             }
         }
         return true;
+    }
 
+    private boolean dfs(char[][] board, char ch, int row, int col) {
+        for(int k=0; k<9; k++){
+            if(board[row][k] == ch && k != col) return false;
+            if(board[k][col] == ch && k != row) return false;
+        }
+        return true;
     }
 }
