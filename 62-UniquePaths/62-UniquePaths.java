@@ -1,4 +1,4 @@
-// Last updated: 10/4/2025, 9:26:04 PM
+// Last updated: 10/4/2025, 9:26:50 PM
 class Solution {
     public int uniquePaths(int m, int n) {
         long res = 1;
