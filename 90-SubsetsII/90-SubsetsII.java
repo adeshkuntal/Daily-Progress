@@ -1,4 +1,4 @@
-// Last updated: 10/4/2025, 8:19:35 PM
+// Last updated: 10/5/2025, 9:20:08 PM
 import java.util.*;
 
 class Solution {
@@ -21,8 +21,8 @@ class Solution {
         }
 
         Fn(nums,res,temp,next);
-
         temp.add(nums[idx]);
+        
         Fn(nums,res,temp,idx+1);
         temp.remove(temp.size()-1);
     }
