@@ -1,36 +1,37 @@
-// Last updated: 8/4/2025, 6:57:24 PM
+// Last updated: 10/6/2025, 5:07:33 PM
 class Solution {
-    public List<List<String>> partition(String ques) {
-        List<String> l=new ArrayList<>();
-        List<List<String>> ans=new ArrayList<>();
-        partitioning(ques,l,ans);
-        return ans;
+    public List<List<String>> partition(String s) {
+        List<List<String>> res = new ArrayList<>();
+        List<String> l = new ArrayList<>();
+        find_partition(s,res,l);
+        return res;
     }
-
-    public static void partitioning(String ques,List<String> l,List<List<String>> ans) {
-        if(ques.length()==0){
-            ans.add(new ArrayList(l));
+    public static void find_partition(String s, List<List<String>> res, List<String> l){
+        if(s.length() == 0){
+            res.add(new ArrayList<>(l));
             return;
         }
-        for(int cut =1;cut<=ques.length();cut++){
-            String s=ques.substring(0,cut);
-            if(ispallendrome(s)){
-                l.add(s);
-                partitioning(ques.substring(cut),l,ans);
+
+        for(int i=1; i<=s.length(); i++){
+            String x = s.substring(0,i);
+            if(ispalindrome(x)){
+                l.add(x);
+                find_partition(s.substring(i),res,l);
                 l.remove(l.size()-1);
             }
         }
     }
-    public static boolean ispallendrome(String s){
-        int i=0;
-        int j=s.length()-1;
-        while(i<=j){
-            if(s.charAt(i)!=s.charAt(j)){
+    public static boolean ispalindrome(String x){
+        int left = 0;
+        int right = x.length() - 1;
+        while(left <= right){
+            if(x.charAt(left) != x.charAt(right)){
                 return false;
             }
-            i++;
-            j--;
+            left++;
+            right--;
         }
+
         return true;
     }
 }
