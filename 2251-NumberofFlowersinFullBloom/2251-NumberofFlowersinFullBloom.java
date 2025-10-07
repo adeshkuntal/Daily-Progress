@@ -1,25 +1,43 @@
-// Last updated: 10/7/2025, 9:30:25 PM
+// Last updated: 10/7/2025, 9:31:18 PM
 class Solution {
-    public int[] fullBloomFlowers(int[][] flowers, int[] persons) {
-        int n = persons.length;
-        int[] result = new int[n];
-        TreeMap<Integer, Integer> treeMap = new TreeMap<>();
-        for (int i = 0; i < flowers.length; i++) {
-            treeMap.put(flowers[i][0], treeMap.getOrDefault(flowers[i][0], 0) + 1);
-            treeMap.put(flowers[i][1] + 1, treeMap.getOrDefault(flowers[i][1] + 1, 0) - 1);
+    public int[] fullBloomFlowers(int[][] flowers, int[] people) {
+        int[] start = new int[flowers.length];
+        int[] end = new int[flowers.length];
+
+        
+        for(int i = 0;i < flowers.length;i++){
+            start[i] = flowers[i][0];
+            end[i] = flowers[i][1]+1;
         }
-        TreeMap<Integer, Integer> sum = new TreeMap<>();
-        int prev = 0;
-        for (Map.Entry<Integer, Integer> entry : treeMap.entrySet()) {
-            prev += entry.getValue();
-            sum.put(entry.getKey(), prev);
+        Arrays.sort(start);
+        Arrays.sort(end);
+
+        int[] ans = new int[people.length];
+
+        for(int i = 0;i < people.length;i++){
+            int before = check(start,people[i]);
+            int after = check(end,people[i]);
+
+            ans[i] = before - after;
         }
-        for (int i = 0; i < n; i++) {
-            Map.Entry<Integer, Integer> entry = sum.floorEntry(persons[i]);
-            if (entry != null) {
-                result[i] = entry.getValue();
+
+        return ans;
+    }
+
+    private int check(int[] nums, int target){
+        int lo = 0, hi = nums.length;
+
+        while(lo < hi){
+            int mid = lo + (hi-lo) / 2;
+
+            if(nums[mid] <= target){
+                lo = mid+1;
+            }
+            else{
+                hi = mid;
             }
         }
-        return result;
+
+        return lo;
     }
 }
