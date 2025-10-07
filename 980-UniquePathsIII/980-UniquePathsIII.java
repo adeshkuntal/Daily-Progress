@@ -1,4 +1,4 @@
-// Last updated: 10/7/2025, 9:05:01 PM
+// Last updated: 10/7/2025, 9:09:09 PM
 class Solution {
     public int uniquePathsIII(int[][] grid) {
         int zero = 0;
@@ -6,8 +6,10 @@ class Solution {
         int b = 0 ;
         for(int r = 0; r < grid.length ; r++){
             for(int c = 0; c < grid[0].length; c++){
-                if(grid[r][c] == 0)   zero++;
-                   else if(grid[r][c] == 1){
+                if(grid[r][c] == 0){
+                    zero++;
+                }
+                else if(grid[r][c] == 1){
                     a = r;
                     b = c;
                 }
@@ -19,7 +21,12 @@ class Solution {
         if(x < 0 || y < 0 || x >= grid.length || y >= grid[0].length || grid[x][y] == -1)
            return 0;
         if(grid[x][y] == 2){
-            return zero == -1 ? 1 : 0;
+            if(zero == -1){
+                return 1;
+            }
+            else{
+                return 0;
+            }
         }
         grid[x][y] = -1;
         zero--;
