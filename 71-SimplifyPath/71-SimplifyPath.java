@@ -1,4 +1,4 @@
-// Last updated: 8/4/2025, 6:57:52 PM
+// Last updated: 10/7/2025, 8:44:06 PM
 class Solution {
     public String simplifyPath(String path) {
         String ans = "";
