@@ -1,45 +1,41 @@
-// Last updated: 10/7/2025, 11:37:39 AM
+// Last updated: 10/7/2025, 8:58:32 PM
 class Solution {
     public boolean isMatch(String s, String p) {
-        int n = s.length();
-        int m = p.length();
-        Boolean[][] dp = new Boolean[n][m];
+        int i = 0;  // pointer for s
+        int j = 0;  // pointer for p
+        int starIdx = -1;  // last position of '*' in p
+        int iIdx = -1;     // position in s when '*' was found
 
-
-       for (Boolean[] row : dp) {
-            Arrays.fill(row, null);
-        }
-
-
-        return Fn(n - 1, m - 1, s, p, dp);
-    }
-
-    public boolean Fn(int i, int j, String s, String p, Boolean[][] dp) {
-        if(i < 0 && j < 0) {
-            return true;
-        }
-        if(j < 0 && i >= 0) {
-            return false;
-        }
-        if(i < 0 && j >= 0) {
-            for(int q = 0; q <= j; q++) {
-                if(p.charAt(q) != '*') {
-                    return false;
-                }
+        while (i < s.length()) {
+            // Case 1: if current chars match or pattern has '?'
+            if (j < p.length() && (p.charAt(j) == s.charAt(i) || p.charAt(j) == '?')) {
+                i++;
+                j++;
             }
-            return true;
+            // Case 2: pattern has '*'
+            else if (j < p.length() && p.charAt(j) == '*') {
+                starIdx = j;   // mark position of '*'
+                iIdx = i;      // mark position in s
+                j++;           // move pattern pointer ahead
+            }
+            // Case 3: mismatch but we had a previous '*'
+            else if (starIdx != -1) {
+                j = starIdx + 1;  // backtrack pattern to after '*'
+                iIdx++;           // let '*' absorb one more char
+                i = iIdx;         // move i forward
+            }
+            // Case 4: no match and no '*' to backtrack to
+            else {
+                return false;
+            }
         }
 
-        if(dp[i][j] != null) return dp[i][j];
-
-        if(s.charAt(i) == p.charAt(j) || p.charAt(j) == '?') {
-            return dp[i][j] = Fn(i - 1, j - 1, s, p, dp);
+        // After finishing s, pattern may still have trailing '*'
+        while (j < p.length() && p.charAt(j) == '*') {
+            j++;
         }
 
-        if(p.charAt(j) == '*') {
-            return dp[i][j] =  Fn(i - 1, j, s, p, dp) || Fn(i, j - 1, s, p, dp);
-        }
-
-        return dp[i][j] = false;
+        // True only if entire pattern is used up
+        return j == p.length();
     }
 }
