@@ -1,4 +1,4 @@
-// Last updated: 10/16/2025, 9:34:48 PM
+// Last updated: 10/16/2025, 9:36:43 PM
 class Solution {
     public int findSmallestInteger(int[] nums, int value) {
         int n = nums.length;
@@ -13,3 +13,24 @@ class Solution {
         return res;
     }
 }
+
+
+
+// class Solution {
+//     public int findSmallestInteger(int[] nums, int value) {
+//         Set<Integer> set = new HashSet<>();
+//         for (int i = 0; i < nums.length; i++) {
+//             int mod = ((nums[i] % value) + value) % value;
+//             set.add(mod);
+//         }
+
+//         int mex = 0;
+//         while (true) {
+//             int mod = mex % value;
+//             if (!set.contains(mod)) {
+//                 return mex;
+//             }
+//             mex++;
+//         }
+//     }
+// }
