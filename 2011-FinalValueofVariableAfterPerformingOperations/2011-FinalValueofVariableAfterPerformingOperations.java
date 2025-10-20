@@ -1,0 +1,16 @@
+// Last updated: 10/20/2025, 1:26:55 PM
+class Solution {
+    public int finalValueAfterOperations(String[] operations) {
+        int count = 0;
+        for(int i=0; i<operations.length; i++){
+            if (operations[i].equals("++X") || operations[i].equals("X++")) {
+                count++;
+            }
+            if (operations[i].equals("--X") || operations[i].equals("X--")) {
+                count--;
+            }
+        }
+
+        return count;
+    }
+}
