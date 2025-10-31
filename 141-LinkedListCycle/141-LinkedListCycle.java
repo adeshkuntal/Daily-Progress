@@ -1,4 +1,4 @@
-// Last updated: 8/4/2025, 6:57:16 PM
+// Last updated: 10/31/2025, 3:04:02 PM
 /**
  * Definition for singly-linked list.
  * class ListNode {
@@ -14,13 +14,16 @@ public class Solution {
     public boolean hasCycle(ListNode head) {
         ListNode slow = head;
         ListNode fast = head;
-        while(fast!=null && fast.next!=null){
+        while(fast != null && fast.next != null) {
+            
             slow = slow.next;
             fast = fast.next.next;
-            if(slow==fast){
+
+            if(slow == fast) {
                 return true;
             }
         }
+
         return false;
     }
 }
