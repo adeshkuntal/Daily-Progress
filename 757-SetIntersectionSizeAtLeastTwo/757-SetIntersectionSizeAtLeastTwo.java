@@ -1,11 +1,13 @@
-// Last updated: 11/20/2025, 8:50:15 PM
+// Last updated: 11/20/2025, 8:50:32 PM
 class Solution {
     public int intersectionSizeTwo(int[][] intervals) {
         Arrays.sort(intervals, (x,y) -> {
             if(x[1] == y[1]) return y[0] - x[0];
             return x[1] - y[1];
         });
-        int ans = 0, a = -1, b = -1;
+        int ans = 0;
+        int a = -1;
+        int b = -1;
         for(int i = 0; i < intervals.length; i++) {
             int l = intervals[i][0], r = intervals[i][1];
             if(l > b) {
