@@ -1,4 +1,4 @@
-// Last updated: 11/24/2025, 10:22:33 PM
+// Last updated: 11/24/2025, 10:27:14 PM
 // class Solution {
 //     public int deleteAndEarn(int[] nums) {
 //         int[] dp = new int[nums.length + 1];
@@ -26,7 +26,6 @@
 
 
 
-
 class Solution {
     public int deleteAndEarn(int[] nums) {
         int max = 0;
@@ -39,17 +38,22 @@ class Solution {
             points[x] += x;
         }
 
-        int prev2 = 0; 
-        int prev1 = 0; 
+        int[] dp = new int[max + 1];
+        Arrays.fill(dp, -1);
 
-        for (int i = 0; i <= max; i++) {
-            int take = prev2 + points[i];
-            int skip = prev1;
-            int curr = Math.max(take, skip);
-            prev2 = prev1;
-            prev1 = curr;
+        return solve(points, 0, dp);
+    }
+    public static int solve(int[] points, int i, int[] dp) {
+        if (i >= points.length){
+            return 0;
         }
 
-        return prev1;
+        if (dp[i] != -1){
+            return dp[i];
+        }
+        int a = points[i] + solve(points, i + 2, dp);
+        int b = solve(points, i + 1, dp);
+
+        return dp[i] = Math.max(a, b);
     }
 }
