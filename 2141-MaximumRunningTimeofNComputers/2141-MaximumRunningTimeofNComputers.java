@@ -1,27 +1,27 @@
-// Last updated: 12/1/2025, 10:15:14 PM
+// Last updated: 12/1/2025, 10:16:54 PM
 1class Solution {
 2
-3    boolean possible(int[] batteries, long mid_minutes, int n) {
-4        long target_minutes = n * mid_minutes;
+3    boolean possible(int[] batteries, long mid_min, int n) {
+4        long target = n * mid_min;
 5        long sum = 0;
 6
 7        for (int i = 0; i < batteries.length; i++) {
-8            sum += Math.min(batteries[i], mid_minutes);
+8            sum += Math.min(batteries[i], mid_min);
 9        }
 10
-11        return sum >= target_minutes;
+11        return sum >= target;
 12    }
 13
 14    public long maxRunTime(int n, int[] batteries) {
 15
 16        long l = Arrays.stream(batteries).min().getAsInt();
 17
-18        long sum_total_minutes = 0;
+18        long sum = 0;
 19        for (int m : batteries) {
-20            sum_total_minutes += m;
+20            sum += m;
 21        }
 22
-23        long r = sum_total_minutes / n;
+23        long r = sum / n;
 24        long result = 0;
 25
 26        while (l <= r) {
