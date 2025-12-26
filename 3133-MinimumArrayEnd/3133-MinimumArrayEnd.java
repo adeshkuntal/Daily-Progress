@@ -1,4 +1,4 @@
-// Last updated: 12/26/2025, 7:09:31 PM
+// Last updated: 12/26/2025, 7:11:30 PM
 1// class Solution {
 2//     public long minEnd(int n, int x) {
 3//         long[] ans = new long[n];
