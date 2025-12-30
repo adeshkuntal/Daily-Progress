@@ -1,4 +1,4 @@
-// Last updated: 12/30/2025, 8:52:57 PM
+// Last updated: 12/30/2025, 8:53:07 PM
 1class Solution {
 2    public int findJudge(int n, int[][] trust) {
 3        if (n == 1 && trust.length == 0){
