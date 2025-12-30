@@ -1,21 +1,20 @@
-// Last updated: 9/26/2025, 8:34:08 PM
-class Solution {
-    public int findJudge(int n, int[][] trust) {
-        if (n == 1 && trust.length == 0){
-            return 1;
-        }
-
-        int[] t_Scores = new int[n + 1]; 
-        for (int[] t : trust) {
-            t_Scores[t[0]]--; 
-            t_Scores[t[1]]++; 
-        }
-        for (int i = 1; i <= n; i++) {
-            if (t_Scores[i] == n - 1){
-                return i; 
-            }
-        }
-
-        return -1;
-    }
-}
+// Last updated: 12/30/2025, 8:52:57 PM
+1class Solution {
+2    public int findJudge(int n, int[][] trust) {
+3        if (n == 1 && trust.length == 0){
+4            return 1;
+5        }
+6        int[] dp = new int[n+1];
+7        for(int[] t : trust){
+8            dp[t[0]]--;
+9            dp[t[1]]++;
+10        }
+11        for(int i=1; i<=n; i++){
+12            if(dp[i] == n-1){
+13                return i;
+14            }
+15        }
+16
+17        return -1;
+18    }
+19}
