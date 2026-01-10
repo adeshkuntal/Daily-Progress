@@ -1,24 +1,28 @@
-// Last updated: 9/4/2025, 11:16:57 AM
-class Solution {
-    public int maxUncrossedLines(int[] nums1, int[] nums2) {
-        return LCSBU(nums1, nums2);
-    }
-    public int LCSBU(int[] s1, int[] s2) {
-        int[][] dp = new int[s1.length + 1][s2.length + 1];
-        for(int i = 1; i <dp.length; i++) {
-            for(int j = 1; j < dp[0].length; j++) {
-                int ans = 0;
-                if(s1[i-1] == s2[j-1]) {
-                    ans = 1 + dp[i - 1][j - 1];
-                }else {
-                    int f = dp[i - 1][j];
-                    int s = dp[i][j - 1];
-                    ans = Math.max(f, s);
-                }
-
-                dp[i][j] = ans;
-            }
-        }
-        return dp[dp.length - 1][dp[0].length - 1];
-    }
-}
+// Last updated: 1/10/2026, 3:38:12 PM
+1class Solution {
+2    public int maxUncrossedLines(int[] nums1, int[] nums2) {
+3        int[][] dp = new int[nums1.length][nums2.length];
+4        for(int[] a : dp){
+5            Arrays.fill(a,-1);
+6        }
+7        return LCS(nums1,nums2,0,0,dp);
+8    }
+9    public static int LCS(int[] nums1, int[] nums2,int i,int j,int[][] dp){
+10        if(i==nums1.length || j==nums2.length){
+11            return 0;
+12        }
+13        if(dp[i][j] != -1){
+14            return dp[i][j];
+15        }
+16        int ans = 0;
+17        if(nums1[i] == nums2[j]){
+18            ans = 1 + LCS(nums1,nums2,i+1,j+1,dp);
+19        }
+20        else{
+21            int f = LCS(nums1,nums2,i+1,j,dp);
+22            int s = LCS(nums1,nums2,i,j+1,dp);
+23            ans = Math.max(f,s);
+24        }
+25        return dp[i][j] = ans;
+26    }
+27}
