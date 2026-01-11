@@ -1,23 +1,24 @@
-// Last updated: 8/4/2025, 6:57:59 PM
-class Solution {
-    public int minPathSum(int[][] grid) {
-        int m = grid.length;
-        int n = grid[0].length;
-
-        for (int i = 1; i < m; i++) {
-            grid[i][0] += grid[i - 1][0];
-        }
-
-        for (int j = 1; j < n; j++) {
-            grid[0][j] += grid[0][j - 1];
-        }
-
-        for (int i = 1; i < m; i++) {
-            for (int j = 1; j < n; j++) {
-                grid[i][j] += Math.min(grid[i - 1][j], grid[i][j - 1]);
-            }
-        }
-
-        return grid[m - 1][n - 1];
-    }
-}
+// Last updated: 1/11/2026, 12:26:35 PM
+1class Solution {
+2    public int minPathSum(int[][] grid) {
+3        int[][] dp = new int[grid.length][grid[0].length];
+4        for(int[] a : dp){
+5            Arrays.fill(a,-1);
+6        }
+7        return fn(grid,0,0,dp);
+8    }
+9    public int fn(int[][] grid,int i,int j,int[][] dp){
+10        if(i == grid.length-1 && j == grid[0].length-1){
+11            return grid[i][j];
+12        }
+13        if(i >= grid.length || j >= grid[0].length){
+14            return Integer.MAX_VALUE;
+15        }
+16        if(dp[i][j] != -1){
+17            return dp[i][j];
+18        }
+19        int forward = fn(grid,i,j+1,dp);
+20        int down = fn(grid,i+1,j,dp);
+21        return dp[i][j] = Math.min(forward,down) + grid[i][j];
+22    }
+23}
