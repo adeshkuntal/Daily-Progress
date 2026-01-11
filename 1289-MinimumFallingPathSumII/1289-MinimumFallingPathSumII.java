@@ -1,4 +1,4 @@
-// Last updated: 1/11/2026, 1:20:35 PM
+// Last updated: 1/11/2026, 1:21:23 PM
 1class Solution {
 2    public int minFallingPathSum(int[][] grid) {
 3        int[][] dp = new int[grid.length][grid[0].length];
@@ -12,28 +12,25 @@
 11        return res;
 12    }
 13    public int fn(int[][] grid,int i,int j,int[][] dp){
-14        if(j < 0 || j >= grid[0].length){
-15            return Integer.MAX_VALUE;
+14        if(i == grid.length-1){
+15            return grid[i][j];
 16        }
-17        if(i == grid.length-1){
-18            return grid[i][j];
+17        if(dp[i][j] != -1000000){
+18            return dp[i][j];
 19        }
-20        if(dp[i][j] != -1000000){
-21            return dp[i][j];
-22        }
-23        int ans = Integer.MAX_VALUE;
-24        for(int k=0; k<grid[0].length; k++){
-25            if(j !=  k){
-26                ans = Math.min(ans,fn(grid,i+1,k,dp));
-27            }
-28        }
-29
-30        return dp[i][j] = ans + grid[i][j];
-31    }
-32}
+20        int ans = Integer.MAX_VALUE;
+21        for(int k=0; k<grid[0].length; k++){
+22            if(j !=  k){
+23                ans = Math.min(ans,fn(grid,i+1,k,dp));
+24            }
+25        }
+26
+27        return dp[i][j] = ans + grid[i][j];
+28    }
+29}
+30
+31
+32
 33
 34
 35
-36
-37
-38
