@@ -1,40 +1,40 @@
-// Last updated: 9/26/2025, 8:00:14 PM
-import java.util.*;
-
-class Solution {
-    public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        Arrays.sort(nums);
-        
-        for (int i = 0; i < nums.length - 2; i++) {
-            if (i > 0 && nums[i] == nums[i - 1]) continue;
-            
-            int left = i + 1;
-            int right = nums.length - 1;
-            
-            while (left < right) {
-                int sum = nums[i] + nums[left] + nums[right];
-                
-                if (sum == 0) {
-                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));
-                    left++;
-                    right--;
-                    
-                    while (left < right && nums[left] == nums[left - 1]){
-                        left++;
-                    }
-                    while (left < right && nums[right] == nums[right + 1]){
-                        right--;
-                    }
-                } 
-                else if (sum < 0) {
-                    left++;
-                } 
-                else {
-                    right--;
-                }
-            }
-        }
-        return res;
-    }
-}
+// Last updated: 1/13/2026, 11:24:04 AM
+1import java.util.*;
+2
+3class Solution {
+4    public List<List<Integer>> threeSum(int[] nums) {
+5        List<List<Integer>> res = new ArrayList<>();
+6        Arrays.sort(nums);
+7        
+8        for (int i = 0; i < nums.length - 2; i++) {
+9            if (i > 0 && nums[i] == nums[i - 1]) continue;
+10            
+11            int left = i + 1;
+12            int right = nums.length - 1;
+13            
+14            while (left < right) {
+15                int sum = nums[i] + nums[left] + nums[right];
+16                
+17                if (sum == 0) {
+18                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));
+19                    left++;
+20                    right--;
+21                    
+22                    while (left < right && nums[left] == nums[left - 1]){
+23                        left++;
+24                    }
+25                    while (left < right && nums[right] == nums[right + 1]){
+26                        right--;
+27                    }
+28                } 
+29                else if (sum < 0) {
+30                    left++;
+31                } 
+32                else {
+33                    right--;
+34                }
+35            }
+36        }
+37        return res;
+38    }
+39}
