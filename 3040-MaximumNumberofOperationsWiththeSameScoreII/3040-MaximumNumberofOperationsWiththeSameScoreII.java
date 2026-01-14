@@ -1,4 +1,4 @@
-// Last updated: 1/14/2026, 2:39:24 PM
+// Last updated: 1/14/2026, 2:39:40 PM
 1class Solution {
 2    public String countOfAtoms(String formula) {
 3        return Fn(formula);
