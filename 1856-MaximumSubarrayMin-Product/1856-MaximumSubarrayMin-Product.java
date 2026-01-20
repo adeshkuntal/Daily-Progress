@@ -1,4 +1,4 @@
-// Last updated: 1/20/2026, 3:47:01 PM
+// Last updated: 1/20/2026, 3:57:43 PM
 1// class Solution {
 2//     public int maxSumMinProduct(int[] nums) {
 3//         long prod = 0;
@@ -28,38 +28,53 @@
 27
 28
 29
-30
-31class Solution {
-32    public int maxSumMinProduct(int[] nums) {
-33        int n = nums.length;
-34        long[] prefix = new long[n + 1];
-35
-36        prefix[0] = 0;
-37        for(int i = 0; i < n; i++){
-38            prefix[i + 1] = prefix[i] + nums[i];
-39        }
-40
-41        Stack<Integer> st = new Stack<>();
-42        long ans = 0;
-43
-44        for(int i = 0; i <= n; i++){
-45            int curr = (i == n) ? 0 : nums[i];
-46
-47            while(!st.isEmpty() && nums[st.peek()] > curr){
-48                int idx = st.pop();
-49                int left = st.isEmpty() ? 0 : st.peek() + 1;
-50                long sum = prefix[i] - prefix[left];
-51                ans = Math.max(ans, sum * nums[idx]);
-52            }
-53
-54            st.push(i);
-55        }
-56
-57        return (int)(ans % 1000000007);
-58    }
-59}
-60
-61
+30class Solution {
+31    public int maxSumMinProduct(int[] nums) {
+32        int n = nums.length;
+33        int mod = 1000000007;
+34
+35        long[] prefix = new long[n + 1];
+36        for(int i = 0; i < n; i++){
+37            prefix[i + 1] = prefix[i] + nums[i];
+38        }
+39
+40        int[] left = new int[n];
+41        int[] right = new int[n];
+42
+43        Stack<Integer> st = new Stack<>();
+44
+45        for(int i = 0; i < n; i++){
+46            while(!st.isEmpty() && nums[st.peek()] > nums[i]){
+47                st.pop();
+48            }
+49            left[i] = st.isEmpty() ? -1 : st.peek();
+50            st.push(i);
+51        }
+52
+53        st.clear();
+54
+55        for(int i = n - 1; i >= 0; i--){
+56            while(!st.isEmpty() && nums[st.peek()] >= nums[i]){
+57                st.pop();
+58            }
+59            right[i] = st.isEmpty() ? n : st.peek();
+60            st.push(i);
+61        }
 62
-63
-64
+63        long ans = 0;
+64        for(int i = 0; i < n; i++){
+65            int L = left[i] + 1;
+66            int R = right[i] - 1;
+67            long sum = prefix[R + 1] - prefix[L];
+68            ans = Math.max(ans, sum * nums[i]);
+69        }
+70
+71        return (int)(ans % mod);
+72    }
+73}
+74
+75
+76
+77
+78
+79
