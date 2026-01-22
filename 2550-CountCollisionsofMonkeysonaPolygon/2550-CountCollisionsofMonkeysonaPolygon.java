@@ -1,4 +1,4 @@
-// Last updated: 1/22/2026, 12:14:41 PM
+// Last updated: 1/22/2026, 12:16:02 PM
 1class Solution {
 2    private static int max = 1000000007;
 3    public int monkeyMove(int n) {         
