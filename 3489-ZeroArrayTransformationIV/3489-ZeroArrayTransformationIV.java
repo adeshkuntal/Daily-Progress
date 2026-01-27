@@ -1,4 +1,4 @@
-// Last updated: 1/27/2026, 9:03:48 PM
+// Last updated: 1/27/2026, 9:06:55 PM
 1// class Solution {
 2//     public boolean isZeroArray(int[] nums, int[][] query) {
 3//         int i = 0;
@@ -40,27 +40,22 @@
 39            int si = query[i][0];
 40            int ei = query[i][1];
 41            diff[si]++;
-42            if(ei + 1 < n) diff[ei + 1]--;
-43        }
-44
-45        int dec = 0;
-46        for(int i = 0; i < n; i++){
-47            dec += diff[i];
-48            if(nums[i] - dec > 0){
-49                return false;
-50            }
-51        }
-52
-53        return true;
-54    }
-55
-56    public boolean zeroArray(int[] nums){
-57        for(int x : nums){
-58            if(x != 0) return false;
-59        }
-60        return true;
-61    }
-62}
-63
-64
-65
+42            if(ei + 1 < n){
+43                diff[ei + 1]--;
+44            }
+45        }
+46
+47        int dec = 0;
+48        for(int i = 0; i < n; i++){
+49            dec += diff[i];
+50            if(nums[i] - dec > 0){
+51                return false;
+52            }
+53        }
+54
+55        return true;
+56    }
+57}
+58
+59
+60
