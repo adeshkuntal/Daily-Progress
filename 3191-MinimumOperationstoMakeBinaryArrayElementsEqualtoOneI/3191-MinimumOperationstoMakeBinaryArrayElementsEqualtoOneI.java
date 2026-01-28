@@ -1,4 +1,4 @@
-// Last updated: 1/28/2026, 9:51:35 PM
+// Last updated: 1/28/2026, 9:51:49 PM
 1class Solution {
 2    public int minOperations(int[] nums) {
 3        int count = 0;
