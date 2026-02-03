@@ -1,4 +1,4 @@
-// Last updated: 2/3/2026, 11:29:58 AM
+// Last updated: 2/3/2026, 12:00:47 PM
 1/**
 2 * Definition for singly-linked list.
 3 * public class ListNode {
@@ -21,18 +21,28 @@
 20
 21        int n = l.size();
 22        int[] arr = new int[n];
-23
-24        for(int i = 0; i < n; i++){
-25            int next = 0;
-26            for(int j = i + 1; j < n; j++){
-27                if(l.get(j) > l.get(i)){
-28                    next = l.get(j);
-29                    break;
-30                }
-31            }
-32            arr[i] = next;
-33        }
-34        return arr;
-35    }
-36}
-37
+23        // for(int i = 0; i < n; i++){
+24        //     int next = 0;
+25        //     for(int j = i + 1; j < n; j++){
+26        //         if(l.get(j) > l.get(i)){
+27        //             next = l.get(j);
+28        //             break;
+29        //         }
+30        //     }
+31        //     arr[i] = next;
+32        // }
+33        // return arr;
+34
+35        Stack<Integer> st = new Stack<>();
+36
+37        for(int i = n - 1; i >= 0; i--){
+38            while(!st.isEmpty() && l.get(st.peek()) <= l.get(i)){
+39                st.pop();
+40            }
+41            arr[i] = st.isEmpty() ? 0 : l.get(st.peek());
+42            st.push(i);
+43        }
+44        return arr;
+45    }
+46}
+47
