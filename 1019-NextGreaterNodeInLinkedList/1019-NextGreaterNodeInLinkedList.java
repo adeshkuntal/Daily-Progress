@@ -1,4 +1,4 @@
-// Last updated: 2/3/2026, 11:29:06 AM
+// Last updated: 2/3/2026, 11:29:32 AM
 1/**
 2 * Definition for singly-linked list.
 3 * public class ListNode {
@@ -23,14 +23,16 @@
 22        int[] arr = new int[n];
 23
 24        for(int i = 0; i < n; i++){
-25            for(int j = i + 1; j < n; j++){
-26                if(l.get(j) > l.get(i)){
-27                    arr[i] = l.get(j);
-28                    break;
-29                }
-30            }
-31        }
-32        return arr;
-33    }
-34}
-35
+25            int next = 0;
+26            for(int j = i + 1; j < n; j++){
+27                if(l.get(j) > l.get(i)){
+28                    next = l.get(j);
+29                    break;
+30                }
+31            }
+32            arr[i] = next;
+33        }
+34        return arr;
+35    }
+36}
+37
