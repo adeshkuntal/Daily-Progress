@@ -1,27 +1,37 @@
-// Last updated: 2/11/2026, 7:13:04 PM
+// Last updated: 2/11/2026, 7:35:06 PM
 1class Solution {
-2    public int rob(int[] nums){
-3        int[] dp = new int[nums.length];
-4        Arrays.fill(dp,-1);
-5        return money(nums,0,dp);
-6        
-7    }
-8    public int money(int[] nums,int idx,int[] dp){
-9        if(idx >= nums.length){
-10            return 0;
-11        }
-12        if(dp[idx] != -1){
-13            return dp[idx];
-14        }
-15        int robb = nums[idx] + money(nums,idx+2,dp);
-16        int not_robb = money(nums,idx+1,dp);
-17
-18        dp[idx] = Math.max(robb,not_robb);
-19
-20        return dp[idx];
-21    }
-22}
-23
-24
+2    public String longestPalindrome(String s) {
+3        if (s.length() == 0) return "";
+4
+5        int maxLen = 0;
+6        String ans = "";
+7
+8        for (int i = 0; i < s.length(); i++) {
+9            for (int j = i; j < s.length(); j++) {
+10                String sub = s.substring(i, j + 1);
+11                if (isPalindrome(sub)) {
+12                    if (j - i + 1 > maxLen) {
+13                        ans = sub;
+14                        maxLen = j - i + 1;
+15                    }
+16                }
+17            }
+18        }
+19        return ans;
+20    }
+21
+22    public boolean isPalindrome(String str) {
+23        int l = 0;
+24        int r = str.length() - 1;
 25
-26
+26        while (l < r) {
+27            if (str.charAt(l) != str.charAt(r)) {
+28                return false;
+29            }
+30            l++;
+31            r--;
+32        }
+33        return true;
+34    }
+35}
+36
