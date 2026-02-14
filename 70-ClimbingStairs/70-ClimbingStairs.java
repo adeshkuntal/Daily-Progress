@@ -1,4 +1,4 @@
-// Last updated: 2/14/2026, 9:09:41 PM
+// Last updated: 2/14/2026, 9:09:51 PM
 1class Solution {
 2    public int minCostClimbingStairs(int[] cost) {
 3        int n = cost.length;
@@ -14,9 +14,9 @@
 13        if(dp[n] != -1){
 14            return dp[n];
 15        }
-16        int one_step = cost[n] + findCost(cost,n+1,dp);
-17        int two_step = cost[n] + findCost(cost,n+2,dp);
-18        dp[n] =  Math.min(one_step,two_step);
+16        int one_step = findCost(cost,n+1,dp);
+17        int two_step = findCost(cost,n+2,dp);
+18        dp[n] = cost[n] + Math.min(one_step,two_step);
 19        return dp[n];
 20    }
 21}
