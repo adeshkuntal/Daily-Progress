@@ -1,4 +1,4 @@
-// Last updated: 1/2/2026, 11:36:54 AM
+// Last updated: 2/16/2026, 9:48:51 PM
 1/*
 2// Definition for a Node.
 3class Node {
@@ -19,57 +19,27 @@
 18}
 19*/
 20
-21
-22//DFS 
-23
-24// class Solution {
-25//     public Node cloneGraph(Node node) {
-26//         if (node == null) {
-27//             return null;
-28//         }
-29        
-30//         Map<Node, Node> visited = new HashMap<>();
-31//         return cloneGraphHelper(node, visited);
-32//     }
-33    
-34//     private Node cloneGraphHelper(Node node, Map<Node, Node> visited) {
-35//         Node copy = new Node(node.val);
-36//         visited.put(node, copy);
-37//         for (Node neighbor : node.neighbors) {
-38//             if (visited.containsKey(neighbor)) {
-39//                 copy.neighbors.add(visited.get(neighbor));
-40//             } else {
-41//                 Node neighborCopy = cloneGraphHelper(neighbor, visited);
-42//                 copy.neighbors.add(neighborCopy);
-43//             }
-44//         }
-45//         return copy;
-46//     }
-47// }
-48
-49
-50//BFS
-51class Solution {
-52    public Node cloneGraph(Node node) {
-53        if (node == null) return null;
-54        if (node.neighbors.isEmpty()) return new Node(node.val);
-55
-56        HashMap<Node, Node> cp = new HashMap<>();
-57        Queue<Node> qu = new LinkedList<>();
-58
-59        cp.put(node, new Node(node.val));
-60        qu.offer(node);
-61
-62        while(!qu.isEmpty()) {
-63            Node curr = qu.poll();
-64            for(Node nei: curr.neighbors) {
-65                if(!cp.containsKey(nei)) {
-66                    cp.put(nei, new Node(nei.val));
-67                    qu.add(nei);
-68                }
-69                cp.get(curr).neighbors.add(cp.get(nei));
-70            }
-71        }
-72        return cp.get(node);
-73    }
-74}
+21class Solution {
+22    public Node cloneGraph(Node node) {
+23        if (node == null) return null;
+24        if (node.neighbors.isEmpty()) return new Node(node.val);
+25
+26        HashMap<Node, Node> cp = new HashMap<>();
+27        Queue<Node> qu = new LinkedList<>();
+28
+29        cp.put(node, new Node(node.val));
+30        qu.offer(node);
+31
+32        while(!qu.isEmpty()) {
+33            Node curr = qu.poll();
+34            for(Node nei: curr.neighbors) {
+35                if(!cp.containsKey(nei)) {
+36                    cp.put(nei, new Node(nei.val));
+37                    qu.add(nei);
+38                }
+39                cp.get(curr).neighbors.add(cp.get(nei));
+40            }
+41        }
+42        return cp.get(node);
+43    }
+44}
