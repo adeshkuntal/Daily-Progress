@@ -1,21 +1,33 @@
-// Last updated: 2/17/2026, 7:39:58 PM
-1class Solution {
-2    public int maxArea(int[] h) {
-3        int left = 0;
-4        int right = h.length-1;
-5        int area = 0;
-6        while(left < right){
-7            int a = (right-left)*Math.min(h[left],h[right]);
-8            if(a > area){
-9                area = a;
-10            }
-11            else if(h[left] < h[right]){
-12                left++;
-13            }
-14            else{
-15                right--;
+// Last updated: 2/17/2026, 7:48:22 PM
+1import java.util.Arrays;
+2
+3class Solution { 
+4    public int longestConsecutive(int[] nums) {
+5        if(nums.length == 0) return 0;
+6
+7        Arrays.sort(nums);
+8
+9        int count = 1;
+10        int len = 1;
+11        int x = nums[0];
+12
+13        for(int i = 1; i < nums.length; i++){
+14            if(nums[i] == x){
+15                continue;
 16            }
-17        }
-18        return area;
-19    }
-20}
+17            else if(nums[i] == x + 1){
+18                count++;
+19                x = nums[i];
+20            }
+21            else{
+22                len = Math.max(len, count);
+23                x = nums[i];
+24                count = 1;
+25            }
+26        }
+27
+28        len = Math.max(len, count);
+29        return len;
+30    }
+31}
+32
