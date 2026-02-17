@@ -1,37 +1,22 @@
-// Last updated: 9/7/2025, 12:18:39 PM
-class Solution {
-    public int maxArea(int[] height) {
-        // Time Complexity - O(n^2)
-
-        // int area = 0;
-        // for(int i=0; i<height.length; i++){
-        //     for(int j=i; j<height.length; j++){
-        //         int ans = (j-i) * Math.min(height[i],height[j]);
-        //         if(ans>area){
-        //             area = ans;
-        //         }
-        //     }
-        // }
-        // return area;
-
-
-        // Time Complexity - O(n)
-        int area = 0;
-        int left = 0;
-        int right = height.length - 1;
-        while(left<right){
-            int res = (right - left) * Math.min(height[left], height[right]);
-            if(res>area){
-                area = res;
-            }
-            if(height[left]<height[right]){
-                left++;
-            }
-            else{
-                right--;
-            }
-        }
-
-        return area;
-    }
-}
+// Last updated: 2/17/2026, 7:39:26 PM
+1class Solution {
+2    public int maxArea(int[] h) {
+3        int left = 0;
+4        int right = h.length-1;
+5        int area = 0;
+6        while(left < right){
+7            int a = (right-left)*Math.min(h[left],h[right]);
+8            if(a > area){
+9                area = a;
+10              
+11            }
+12            else if(h[left] < h[right]){
+13                left++;
+14            }
+15            else{
+16                right--;
+17            }
+18        }
+19        return area;
+20    }
+21}
