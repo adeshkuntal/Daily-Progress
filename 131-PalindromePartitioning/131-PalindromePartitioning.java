@@ -1,33 +1,28 @@
-// Last updated: 2/20/2026, 10:01:15 PM
-1class Solution {
-2    public int getMaximumGold(int[][] grid) {
-3        int res = 0;
-4        for(int i=0; i<grid.length; i++){
-5            for(int j=0; j<grid[0].length; j++){
-6                if(grid[i][j] != 0){
-7                    int ans = dfs(grid,i,j);
-8                    res = Math.max(res,ans);
-9                }
-10            }
-11        }
-12        return res;
-13    }
-14
-15    public int dfs(int[][] grid,int i,int j){
-16        if(i<0 || i>= grid.length || j<0 || j>= grid[0].length || grid[i][j]==0){
-17            return 0;
-18        }
-19
-20        int gold = grid[i][j];
-21        grid[i][j] = 0;
-22
-23        int top = dfs(grid,i - 1, j);
-24        int right = dfs(grid,i, j + 1);
-25        int bottom = dfs(grid,i + 1, j);
-26        int left = dfs(grid,i, j - 1);
-27
-28        grid[i][j] = gold;
-29
-30        return gold + Math.max(top,Math.max(right,Math.max(bottom,left)));
-31    }
-32}
+// Last updated: 2/20/2026, 10:13:20 PM
+1import java.util.*;
+2
+3class Solution {
+4    public List<List<Integer>> permute(int[] nums) {
+5        List<List<Integer>> res = new ArrayList<>();
+6        find_per(nums, res, new ArrayList<>(), new boolean[nums.length]);
+7        return res;
+8    }
+9
+10    public static void find_per(int[] nums, List<List<Integer>> res, List<Integer> temp, boolean[] used) {
+11        if (temp.size() == nums.length) {
+12            res.add(new ArrayList<>(temp));
+13            return;
+14        }
+15
+16        for (int i = 0; i < nums.length; i++) {
+17            if (used[i]){
+18                continue;
+19            }
+20            used[i] = true;
+21            temp.add(nums[i]);
+22            find_per(nums, res, temp, used);
+23            used[i] = false;
+24            temp.remove(temp.size() - 1);
+25        }
+26    }
+27}
