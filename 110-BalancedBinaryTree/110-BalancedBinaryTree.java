@@ -1,16 +1,17 @@
-// Last updated: 2/24/2026, 11:27:35 AM
+// Last updated: 2/24/2026, 11:53:04 AM
 1class Solution {
-2    public boolean isBalanced(String num) {
-3        int even = 0;
-4        int odd = 0;
-5        for(int i = 0; i < num.length(); i++){
-6            if(i % 2 == 0){
-7                even += num.charAt(i) - '0';
-8            }
-9            else{
-10                odd += num.charAt(i) - '0';
-11            }
-12        }
-13        return even == odd;
-14    }
-15}
+2    int max = Integer.MIN_VALUE;
+3    public int maxPathSum(TreeNode root) {
+4        solve(root);
+5        return max;
+6    }
+7    private int solve(TreeNode root){
+8        if(root == null){
+9            return 0;
+10        }
+11        int left = Math.max(0, solve(root.left));
+12        int right = Math.max(0, solve(root.right));
+13        max = Math.max(max, left + right + root.val);
+14        return root.val + Math.max(left, right);
+15    }
+16}
