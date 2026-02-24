@@ -1,42 +1,36 @@
-// Last updated: 10/13/2025, 9:25:09 PM
-import java.util.*;
-
-class Solution { 
-    public int countArrangement(int n) {
-        if (n == 1) {
-            return 1;
-        }
-        int[] arr = new int[n];
-        for (int i = 0; i < n; i++) {
-            arr[i] = i + 1;
-        }
-        return find_pre(arr, 0, new ArrayList<>(), new boolean[n]);
-    }
-
-    public static int find_pre(int[] arr, int count, List<Integer> temp, boolean[] visited) {
-        if (temp.size() == arr.length) {
-            for (int i = 0; i < temp.size(); i++) {
-                int val = temp.get(i);
-                int pos = i + 1;
-                if (val % pos != 0 && pos % val != 0) {
-                    return count; 
-                }
-            }
-            return count + 1;
-        }
-
-        for (int i = 0; i < arr.length; i++) {
-            if (visited[i]) continue;
-            int pos = temp.size() + 1;
-            int val = arr[i];
-            if (val % pos == 0 || pos % val == 0) {
-                visited[i] = true;
-                temp.add(val);
-                count = find_pre(arr, count, temp, visited);
-                visited[i] = false;
-                temp.remove(temp.size() - 1);
-            }
-        }
-        return count;
-    }
-}
+// Last updated: 2/24/2026, 10:03:30 PM
+1import java.util.*;
+2
+3class Solution { 
+4    int count = 0;
+5
+6    public int countArrangement(int n) {
+7        int[] arr = new int[n];
+8        for (int i = 0; i < n; i++) {
+9            arr[i] = i + 1;
+10        }
+11        find_pre(arr, new ArrayList<>(), new boolean[n]);
+12        return count;
+13    }
+14
+15    public void find_pre(int[] arr, List<Integer> temp, boolean[] used) {
+16        if (temp.size() == arr.length) {
+17            count++;
+18            return;
+19        }
+20
+21        int pos = temp.size() + 1;
+22
+23        for (int i = 0; i < arr.length; i++) {
+24            if (used[i]) continue;
+25
+26            if (arr[i] % pos == 0 || pos % arr[i] == 0) {
+27                used[i] = true;
+28                temp.add(arr[i]);
+29                find_pre(arr, temp, used);
+30                temp.remove(temp.size() - 1);
+31                used[i] = false;
+32            }
+33        }
+34    }
+35}
