@@ -1,4 +1,4 @@
-// Last updated: 2/24/2026, 11:53:04 AM
+// Last updated: 2/24/2026, 12:01:55 PM
 1class Solution {
 2    int max = Integer.MIN_VALUE;
 3    public int maxPathSum(TreeNode root) {
