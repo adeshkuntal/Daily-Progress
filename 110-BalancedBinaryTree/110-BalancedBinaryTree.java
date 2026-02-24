@@ -1,4 +1,4 @@
-// Last updated: 2/24/2026, 12:22:19 PM
+// Last updated: 2/24/2026, 12:42:24 PM
 1/**
 2 * Definition for a binary tree node.
 3 * public class TreeNode {
@@ -15,17 +15,39 @@
 14 * }
 15 */
 16class Solution {
-17    public boolean isSameTree(TreeNode p, TreeNode q) {
-18        if(p == null && q == null){
-19            return true;
-20        }
-21        if(p == null || q == null){
-22            return false;
-23        }
-24        if(p.val != q.val){
-25            return false;
-26        }
-27
-28        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
-29    }
-30}
+17    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+18        List<List<Integer>> res = new ArrayList<>();
+19        
+20        if(root == null) return res;
+21        
+22        Queue<TreeNode> q = new LinkedList<>();
+23        q.add(root);
+24        boolean flag = false;
+25        
+26        while(!q.isEmpty()){
+27            int size = q.size();
+28            List<Integer> l = new ArrayList<>();
+29            
+30            for(int i=0; i<size; i++){
+31                TreeNode curr = q.poll();
+32                l.add(curr.val);
+33                
+34                if(curr.left != null){
+35                    q.add(curr.left);
+36                }
+37                if(curr.right != null){
+38                    q.add(curr.right);
+39                }
+40            }
+41            
+42            if(flag){
+43                Collections.reverse(l);
+44            }
+45            
+46            res.add(l);
+47            flag = !flag;
+48        }
+49        
+50        return res;
+51    }
+52}
