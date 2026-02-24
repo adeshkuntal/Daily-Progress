@@ -1,19 +1,31 @@
-// Last updated: 2/24/2026, 12:07:42 PM
-1class Solution {
-2    int max = Integer.MIN_VALUE;
-3    public int maxPathSum(TreeNode root) {
-4        solve(root);
-5        return max;
-6    }
-7    private int solve(TreeNode root){
-8        if(root == null){
-9            return 0;
-10        }
-11        int left = Math.max(0, solve(root.left));
-12        int right = Math.max(0, solve(root.right));
-13
-14        max = Math.max(max, left + right + root.val);
-15
-16        return root.val + Math.max(left, right);
-17    }
-18}
+// Last updated: 2/24/2026, 12:22:19 PM
+1/**
+2 * Definition for a binary tree node.
+3 * public class TreeNode {
+4 *     int val;
+5 *     TreeNode left;
+6 *     TreeNode right;
+7 *     TreeNode() {}
+8 *     TreeNode(int val) { this.val = val; }
+9 *     TreeNode(int val, TreeNode left, TreeNode right) {
+10 *         this.val = val;
+11 *         this.left = left;
+12 *         this.right = right;
+13 *     }
+14 * }
+15 */
+16class Solution {
+17    public boolean isSameTree(TreeNode p, TreeNode q) {
+18        if(p == null && q == null){
+19            return true;
+20        }
+21        if(p == null || q == null){
+22            return false;
+23        }
+24        if(p.val != q.val){
+25            return false;
+26        }
+27
+28        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+29    }
+30}
