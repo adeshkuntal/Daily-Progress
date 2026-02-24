@@ -1,4 +1,4 @@
-// Last updated: 2/24/2026, 12:01:55 PM
+// Last updated: 2/24/2026, 12:07:42 PM
 1class Solution {
 2    int max = Integer.MIN_VALUE;
 3    public int maxPathSum(TreeNode root) {
@@ -11,7 +11,9 @@
 10        }
 11        int left = Math.max(0, solve(root.left));
 12        int right = Math.max(0, solve(root.right));
-13        max = Math.max(max, left + right + root.val);
-14        return root.val + Math.max(left, right);
-15    }
-16}
+13
+14        max = Math.max(max, left + right + root.val);
+15
+16        return root.val + Math.max(left, right);
+17    }
+18}
