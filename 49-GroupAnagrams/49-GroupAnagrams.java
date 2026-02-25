@@ -1,24 +1,16 @@
-// Last updated: 2/25/2026, 8:07:28 PM
+// Last updated: 2/25/2026, 8:21:32 PM
 1class Solution {
-2    public long minimumTime(int[] time, int t) {
-3        Arrays.sort(time);
-4        long l = 1;
-5        long r = (long)t*time[0];
-6        while(l < r){
-7            long mid = l+(r-l)/2;
-8            long count = 0;
-9            for(int i=0; i<time.length; i++){
-10                count += mid/time[i];
-11            }
-12            if(count >= t){
-13                r = mid;
-14            }
-15            else{
-16                l = mid+1;
-17            }
-18
-19        }
-20
-21        return l;
-22    }
-23}
+2    public int minPairSum(int[] nums) {
+3        Arrays.sort(nums);
+4        int l = 0;
+5        int r = nums.length-1;
+6        int minSum = 0;
+7        while(l<r){
+8            minSum = Math.max(minSum,nums[l]+nums[r]);
+9            l++;
+10            r--;
+11        }
+12
+13        return minSum;
+14    }
+15}
