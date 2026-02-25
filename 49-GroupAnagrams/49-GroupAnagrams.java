@@ -1,4 +1,4 @@
-// Last updated: 2/25/2026, 8:02:02 PM
+// Last updated: 2/25/2026, 8:07:28 PM
 1class Solution {
 2    public long minimumTime(int[] time, int t) {
 3        Arrays.sort(time);
