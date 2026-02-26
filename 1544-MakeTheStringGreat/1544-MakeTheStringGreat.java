@@ -1,4 +1,4 @@
-// Last updated: 2/26/2026, 10:14:57 PM
+// Last updated: 2/26/2026, 10:15:17 PM
 1import java.util.*;
 2
 3class Solution {
@@ -22,11 +22,9 @@
 21                addRocks -= remain[i];
 22                count++;
 23            }
-24            else{
-25                break;
-26            }
-27        }
-28        
-29        return count;
-30    }
-31}
+24            
+25        }
+26        
+27        return count;
+28    }
+29}
