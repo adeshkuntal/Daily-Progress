@@ -1,4 +1,4 @@
-// Last updated: 3/1/2026, 2:31:08 PM
+// Last updated: 3/1/2026, 8:55:40 PM
 1/**
 2 * Definition for a binary tree node.
 3 * public class TreeNode {
@@ -10,39 +10,39 @@
 9 */
 10public class Codec {
 11
-12    public String serialize(TreeNode root) {
-13        if(root == null) return "";
-14        
-15        StringBuilder sb = new StringBuilder();
-16        Queue<TreeNode> q = new LinkedList<>();
-17        q.add(root);
-18        
-19        while(!q.isEmpty()) {
-20            TreeNode curr = q.poll();
-21            
-22            if(curr == null) {
-23                sb.append("null,");
-24            } else {
-25                sb.append(curr.val).append(",");
-26                q.add(curr.left);
-27                q.add(curr.right);
-28            }
-29        }
-30        
-31        return sb.toString();
+12    // Encodes a tree to a single string.
+13    public String serialize(TreeNode root) {
+14        if(root == null) return "";
+15        
+16        String s = "";
+17        Queue<TreeNode> q = new LinkedList<>();
+18        q.add(root);
+19
+20        while(!q.isEmpty()){
+21            TreeNode curr = q.poll();
+22            if(curr == null){
+23                s += "null,";
+24            }
+25            else{
+26                s += curr.val+",";
+27                q.add(curr.left);
+28                q.add(curr.right);
+29            }
+30        }
+31        return s;
 32    }
 33
-34    public TreeNode deserialize(String data) {
-35        if(data.length() == 0) return null;
-36        
-37        String[] arr = data.split(",");
-38        TreeNode root = new TreeNode(Integer.parseInt(arr[0]));
-39        
-40        Queue<TreeNode> q = new LinkedList<>();
-41        q.add(root);
-42        
-43        int i = 1;
-44        
+34    // Decodes your encoded data to tree.
+35    public TreeNode deserialize(String data) {
+36        if(data.length() == 0) return null;
+37
+38        String[] arr = data.split(",");
+39        TreeNode root = new TreeNode(Integer.parseInt(arr[0]));
+40        
+41        Queue<TreeNode> q = new LinkedList<>();
+42        q.add(root);
+43        
+44        int i = 1;
 45        while(!q.isEmpty()) {
 46            TreeNode curr = q.poll();
 47            
@@ -58,7 +58,11 @@
 57            }
 58            i++;
 59        }
-60        
-61        return root;
-62    }
-63}
+60        return root;
+61    }
+62}
+63
+64// Your Codec object will be instantiated and called as such:
+65// Codec ser = new Codec();
+66// Codec deser = new Codec();
+67// TreeNode ans = deser.deserialize(ser.serialize(root));
