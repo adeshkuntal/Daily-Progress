@@ -1,39 +1,26 @@
-// Last updated: 8/13/2025, 10:54:47 AM
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
-        return createTree(inorder,preorder,0,inorder.length-1,0,preorder.length-1);   
-    }
-    public TreeNode createTree(int[] in,int[] pre,int ilo,int ihi,int plo,int phi){
-        if(ilo>ihi || plo>phi) return null;
-        TreeNode node=new TreeNode(pre[plo]);
-        int idx=search(in,ilo,ihi,pre[plo]);
-        int c=idx-ilo;
-        node.left=createTree(in,pre,ilo,idx-1,plo+1,plo+c);
-        node.right=createTree(in,pre,idx+1,ihi,plo+c+1,phi);
-        return node;
-    }
-
-    public int search(int[] in,int ilo,int ihi,int item){
-        for(int i=ilo;i<=ihi;i++){
-            if(in[i]==item){
-                return i;
-            }
-        }
-        return 0;
-    }
-}
+// Last updated: 3/1/2026, 2:03:46 PM
+1class Solution {
+2    int preIndex = 0;
+3    Map<Integer, Integer> map = new HashMap<>();
+4    
+5    public TreeNode buildTree(int[] preorder, int[] inorder) {
+6        for(int i = 0; i < inorder.length; i++) {
+7            map.put(inorder[i], i);
+8        }
+9        return build(preorder, 0, inorder.length - 1);
+10    }
+11    
+12    public TreeNode build(int[] preorder, int left, int right) {
+13        if(left > right) return null;
+14        
+15        int val = preorder[preIndex++];
+16        TreeNode root = new TreeNode(val);
+17        
+18        int index = map.get(val);
+19        
+20        root.left = build(preorder, left, index - 1);
+21        root.right = build(preorder, index + 1, right);
+22        
+23        return root;
+24    }
+25}
