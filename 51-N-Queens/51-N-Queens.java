@@ -1,63 +1,55 @@
-// Last updated: 3/2/2026, 10:04:08 PM
-1import java.util.*;
-2
-3class Solution {
-4    public List<List<String>> solveNQueens(int n) {
-5        List<List<String>> allBoards = new ArrayList<>();
-6        char[][] board = new char[n][n];
-7        for (int i = 0; i < n; i++) {
-8            Arrays.fill(board[i], '.');
-9        }
-10        place_queen(board, allBoards, 0);
-11        return allBoards;
-12    }
-13
-14    public static void place_queen(char[][] board, List<List<String>> allBoards, int col) {
-15        if (col == board.length) {
-16            saveBoard(board, allBoards);
-17            return;
-18        }
-19        for (int row = 0; row < board.length; row++) {
-20            if (isSafe(row, col, board)) {
-21                board[row][col] = 'Q';
-22                place_queen(board, allBoards, col + 1);
-23                board[row][col] = '.';
-24            }
-25        }
-26    }
-27
-28    public static void saveBoard(char[][] board, List<List<String>> allBoards) {
-29        List<String> newBoard = new ArrayList<>();
-30        for (int i = 0; i < board.length; i++) {
-31            String row = "";
-32            for (int j = 0; j < board.length; j++) {
-33                row += board[i][j];
-34            }
-35            newBoard.add(row);
-36        }
-37        allBoards.add(newBoard);
-38    }
-39
-40    public static boolean isSafe(int row, int col, char[][] board) {
-41        // upper-left diagonal
-42        for (int r = row, c = col; r >= 0 && c >= 0; r--, c--) {
-43            if (board[r][c] == 'Q'){
-44                return false;
-45            }
-46        }
-47        // left side
-48        for (int c = col; c >= 0; c--) {
-49            if (board[row][c] == 'Q'){
-50                return false;
-51            }
-52        }
-53        // lower-left diagonal
-54        for (int r = row, c = col; r < board.length && c >= 0; r++, c--) {
-55            if (board[r][c] == 'Q'){
-56                return false;
-57            }
-58        }
-59        return true;
-60    }
-61}
-62
+// Last updated: 3/2/2026, 10:28:30 PM
+1class Solution {
+2    public List<List<String>> solveNQueens(int n) {
+3        List<List<String>> allBoards = new ArrayList<>();
+4        char[][] board = new char[n][n];
+5        for (int i = 0; i < n; i++) {
+6            Arrays.fill(board[i], '.');
+7        }
+8        place_queen(board, allBoards, 0);
+9        return allBoards;
+10    }
+11    public static void place_queen(char[][] board, List<List<String>> allBoards, int col){
+12        if(col >= board.length){
+13            saveBoard(board,allBoards);
+14            return;
+15        }
+16        for(int row=0; row<board.length; row++){
+17            if(isSafe(row,col,board)){
+18                board[row][col] = 'Q';
+19                place_queen(board,allBoards,col+1);
+20                board[row][col] = '.';
+21            }
+22        }
+23    }
+24    public static void saveBoard(char[][] board, List<List<String>> allBoards){
+25        List<String> newBoard = new ArrayList<>();
+26        for(int row=0; row<board.length; row++){
+27            String s = "";
+28            for(int col=0; col<board.length; col++){
+29                s += board[row][col];
+30            }
+31            newBoard.add(s);
+32        }
+33        allBoards.add(newBoard);
+34    }
+35    public static boolean isSafe(int row, int col, char[][] board){
+36        for(int r=row,c = col; r>=0 && c>=0; r--,c--){
+37            if(board[r][c] == 'Q'){
+38                return false;
+39            }
+40        }
+41        for(int r=row,c = col; r<board.length && c>=0; r++,c--){
+42            if(board[r][c] == 'Q'){
+43                return false;
+44            }
+45        }
+46        for(int c = col; c>=0; c--){
+47            if(board[row][c] == 'Q'){
+48                return false;
+49            }
+50        }
+51        return true;
+52
+53    }
+54}
