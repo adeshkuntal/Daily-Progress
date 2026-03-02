@@ -1,4 +1,4 @@
-// Last updated: 3/2/2026, 10:28:30 PM
+// Last updated: 3/2/2026, 10:28:38 PM
 1class Solution {
 2    public List<List<String>> solveNQueens(int n) {
 3        List<List<String>> allBoards = new ArrayList<>();
