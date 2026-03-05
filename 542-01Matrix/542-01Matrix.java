@@ -1,4 +1,4 @@
-// Last updated: 3/5/2026, 2:41:02 PM
+// Last updated: 3/5/2026, 2:41:25 PM
 1import java.util.*;
 2
 3class Solution {
@@ -12,7 +12,7 @@
 11        for(int i=0;i<m;i++){
 12            for(int j=0;j<n;j++){
 13                if(mat[i][j]==0){
-14                    q.offer(new int[]{i,j});
+14                    q.add(new int[]{i,j});
 15                }else{
 16                    dist[i][j] = -1;
 17                }
@@ -30,7 +30,7 @@
 29
 30                if(x>=0 && y>=0 && x<m && y<n && dist[x][y]==-1){
 31                    dist[x][y] = dist[cur[0]][cur[1]] + 1;
-32                    q.offer(new int[]{x,y});
+32                    q.add(new int[]{x,y});
 33                }
 34            }
 35        }
