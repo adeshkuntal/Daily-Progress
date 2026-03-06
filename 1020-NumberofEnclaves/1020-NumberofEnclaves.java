@@ -1,4 +1,4 @@
-// Last updated: 3/6/2026, 1:00:30 PM
+// Last updated: 3/6/2026, 1:01:06 PM
 1class Solution {
 2    public int numEnclaves(int[][] grid) {
 3        int m = grid.length;
