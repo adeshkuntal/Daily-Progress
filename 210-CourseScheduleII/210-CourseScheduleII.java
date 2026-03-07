@@ -1,4 +1,4 @@
-// Last updated: 12/31/2025, 12:25:23 PM
+// Last updated: 3/7/2026, 12:43:37 PM
 1class Solution {
 2    public int[] findOrder(int n, int[][] prerequisites) {
 3        List<Integer>[] adj = new List[n];
@@ -44,7 +44,5 @@
 43            result[i] = ans.get(i);
 44        }
 45        return result;
-46
-47
-48    }
-49}
+46    }
+47}
