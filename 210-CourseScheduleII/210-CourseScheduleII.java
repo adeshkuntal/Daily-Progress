@@ -1,48 +1,49 @@
-// Last updated: 3/7/2026, 12:43:37 PM
+// Last updated: 3/7/2026, 12:49:40 PM
 1class Solution {
-2    public int[] findOrder(int n, int[][] prerequisites) {
-3        List<Integer>[] adj = new List[n];
-4        int[] indegree = new int[n];
-5        List<Integer> ans = new ArrayList<>();
-6
-7        for (int[] pair : prerequisites) {
-8            int course = pair[0];
-9            int prerequisite = pair[1];
-10            if (adj[prerequisite] == null) {
-11                adj[prerequisite] = new ArrayList<>();
-12            }
-13            adj[prerequisite].add(course);
-14            indegree[course]++;
-15        }
-16
-17        Queue<Integer> queue = new LinkedList<>();
-18        for (int i = 0; i < n; i++) {
-19            if (indegree[i] == 0) {
-20                queue.offer(i);
-21            }
-22        }
-23
-24        while (!queue.isEmpty()) {
-25            int current = queue.poll();
-26            ans.add(current);
-27
-28            if (adj[current] != null) {
-29                for (int next : adj[current]) {
-30                    indegree[next]--;
-31                    if (indegree[next] == 0) {
-32                        queue.offer(next);
-33                    }
+2    public int[] findOrder(int V, int[][] edges) {
+3        int[] indegree = new int[V];
+4        for(int i = 0; i < edges.length; i++){
+5            indegree[edges[i][0]]++; 
+6        }
+7        
+8        Queue<Integer> q = new LinkedList<>();
+9        ArrayList<Integer> ans = new ArrayList<>();
+10        
+11        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+12        for(int i = 0; i < V; i++){
+13            map.put(i, new ArrayList<>());
+14        }
+15
+16        for(int i = 0; i < edges.length; i++){
+17            map.get(edges[i][1]).add(edges[i][0]);
+18        }
+19
+20        for(int i = 0; i < V; i++){
+21            if(indegree[i] == 0){
+22                q.add(i);
+23            }
+24        }
+25        
+26        while(!q.isEmpty()){
+27            int cur = q.poll();
+28            ans.add(cur);
+29
+30            for(int x : map.get(cur)){
+31                indegree[x]--;
+32                if(indegree[x] == 0){
+33                    q.add(x);
 34                }
 35            }
 36        }
-37        if(ans.size() != n) {
-38            return new int[] {};
-39        }
-40
-41        int[] result = new int[ans.size()];
-42        for(int i = 0; i < ans.size(); i++) {
-43            result[i] = ans.get(i);
-44        }
-45        return result;
-46    }
-47}
+37
+38        if(ans.size() != V){
+39            return new int[0];
+40        }
+41
+42        int[] result = new int[ans.size()];
+43        for(int i = 0; i < ans.size(); i++){
+44            result[i] = ans.get(i);
+45        }
+46        return result;
+47    }
+48}
