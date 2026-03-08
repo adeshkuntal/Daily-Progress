@@ -1,4 +1,4 @@
-// Last updated: 3/8/2026, 9:28:42 PM
+// Last updated: 3/8/2026, 9:31:04 PM
 1class Solution {
 2    public int minCost(int maxTime, int[][] edge, int[] fees) {
 3
@@ -22,28 +22,27 @@
 21        minTime[0] = 0;
 22
 23        while(!pq.isEmpty()){
-24
-25            int[] curr = pq.poll();
-26            int node = curr[0];
-27            int time = curr[1];
-28            int cost = curr[2];
-29
-30            if(node == n-1) return cost;
-31
-32            for(int[] nbr : map.get(node)){
-33
-34                int next = nbr[0];
-35                int newTime = time + nbr[1];
-36
-37                if(newTime > maxTime) continue;
-38
-39                if(newTime < minTime[next]){
-40                    minTime[next] = newTime;
-41                    pq.add(new int[]{next,newTime,cost + fees[next]});
-42                }
-43            }
-44        }
-45
-46        return -1;
-47    }
-48}
+24            int[] curr = pq.poll();
+25            int node = curr[0];
+26            int time = curr[1];
+27            int cost = curr[2];
+28
+29            if(node == n-1) return cost;
+30
+31            for(int[] nbr : map.get(node)){
+32
+33                int next = nbr[0];
+34                int newTime = time + nbr[1];
+35                int newCost = cost + fees[next]; 
+36                if(newTime > maxTime) continue;
+37
+38                if(newTime < minTime[next]){
+39                    minTime[next] = newTime;
+40                    pq.add(new int[]{next,newTime,newCost});
+41                }
+42            }
+43        }
+44
+45        return -1;
+46    }
+47}
