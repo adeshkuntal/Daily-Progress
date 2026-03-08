@@ -1,4 +1,4 @@
-// Last updated: 3/8/2026, 11:34:41 AM
+// Last updated: 3/8/2026, 11:38:40 AM
 1import java.util.*;
 2
 3class Solution {
@@ -19,22 +19,22 @@
 18
 19        while(!pq.isEmpty()){
 20            int[] curr = pq.poll();
-21            int x = curr[0];
-22            int y = curr[1];
-23            int e = curr[2];
-24
-25            if(x==n-1 && y==m-1) return e;
-26
-27            for(int[] d : dir){
-28                int nx = x + d[0];
-29                int ny = y + d[1];
+21
+22            if(curr[0]==n-1 && curr[1]==m-1){
+23                return curr[2];
+24            }
+25
+26            for(int[] d : dir){
+27                int x = curr[0] + d[0];
+28                int y = curr[1] + d[1];
+29                int e = curr[2];
 30
-31                if(nx>=0 && ny>=0 && nx<n && ny<m){
-32                    int ne = Math.max(e, Math.abs(grid[nx][ny]-grid[x][y]));
+31                if(x>=0 && y>=0 && x<n && y<m){
+32                    int ne = Math.max(e, Math.abs(grid[x][y]-grid[curr[0]][curr[1]]));
 33
-34                    if(ne < effort[nx][ny]){
-35                        effort[nx][ny] = ne;
-36                        pq.add(new int[]{nx,ny,ne});
+34                    if(ne < effort[x][y]){
+35                        effort[x][y] = ne;
+36                        pq.add(new int[]{x,y,ne});
 37                    }
 38                }
 39            }
