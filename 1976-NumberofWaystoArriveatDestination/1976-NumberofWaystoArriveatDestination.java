@@ -1,4 +1,4 @@
-// Last updated: 1/4/2026, 7:55:31 PM
+// Last updated: 3/8/2026, 5:47:26 PM
 1class Solution {
 2    public int countPaths(int n, int[][] roads) {
 3        int mod = 1000000007;
