@@ -1,4 +1,4 @@
-// Last updated: 3/8/2026, 1:02:17 PM
+// Last updated: 3/8/2026, 5:37:45 PM
 1// class Solution {
 2//     public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
 3//         int[] dist = new int[n];
@@ -61,10 +61,10 @@
 60                    int v = edge[0];
 61                    int wt = edge[1];
 62
-63                    if(cost + wt >= minCost[v]) continue;
-64
-65                    minCost[v] = cost + wt;
-66                    q.add(new int[]{v, minCost[v]});
+63                    if(cost + wt <= minCost[v]){
+64                        minCost[v] = cost + wt;
+65                        q.add(new int[]{v, minCost[v]});
+66                    }
 67                }
 68            }
 69
