@@ -1,53 +1,38 @@
-// Last updated: 3/9/2026, 7:35:14 PM
+// Last updated: 3/9/2026, 7:37:05 PM
 1class Solution {
-2    public int makeConnected(int n, int[][] grid) {
-3        int[] inner = new int[n];
-4        int[] outer = new int[n];
-5
-6        for(int[] e : grid){
-7            inner[e[1]]++;
-8            outer[e[0]]++;
-9        }
-10
-11        if(grid.length < n - 1){
-12            return -1;
+2    public int makeConnected(int n, int[][] connections) {
+3        if(connections.length < n-1) return -1;
+4
+5        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+6        for(int i=0;i<n;i++){
+7            adj.add(new ArrayList<>());
+8        }
+9
+10        for(int[] e:connections){
+11            adj.get(e[0]).add(e[1]);
+12            adj.get(e[1]).add(e[0]);
 13        }
 14
-15        int[] parent = new int[n];
-16        for(int i=0;i<n;i++){
-17            parent[i] = i;
-18        }
-19
-20        for(int[] e : grid){
-21            int a = e[0];
-22            int b = e[1];
-23
-24            while(parent[a] != a){
-25                a = parent[a];
-26            }
+15        boolean[] vis = new boolean[n];
+16        int comp = 0;
+17
+18        for(int i=0;i<n;i++){
+19            if(!vis[i]){
+20                dfs(i,adj,vis);
+21                comp++;
+22            }
+23        }
+24
+25        return comp-1;
+26    }
 27
-28            while(parent[b] != b){
-29                b = parent[b];
-30            }
-31
-32            if(a != b){
-33                parent[a] = b;
+28    void dfs(int node,ArrayList<ArrayList<Integer>> adj,boolean[] vis){
+29        vis[node]=true;
+30
+31        for(int it:adj.get(node)){
+32            if(!vis[it]){
+33                dfs(it,adj,vis);
 34            }
 35        }
-36
-37        int notConnect = 0;
-38        for(int i=0;i<n;i++){
-39            if(parent[i] == i){
-40                notConnect++;
-41            }
-42        }
-43
-44        int freeCable = grid.length - (n - notConnect);
-45
-46        if(freeCable >= notConnect - 1){
-47            return notConnect - 1;
-48        }
-49
-50        return -1;
-51    }
-52}
+36    }
+37}
