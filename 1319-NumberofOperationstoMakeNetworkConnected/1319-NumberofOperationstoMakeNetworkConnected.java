@@ -1,4 +1,4 @@
-// Last updated: 3/9/2026, 7:27:38 PM
+// Last updated: 3/9/2026, 7:35:14 PM
 1class Solution {
 2    public int makeConnected(int n, int[][] grid) {
 3        int[] inner = new int[n];
