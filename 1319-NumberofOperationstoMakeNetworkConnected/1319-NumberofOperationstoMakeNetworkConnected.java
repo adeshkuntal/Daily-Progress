@@ -1,4 +1,4 @@
-// Last updated: 3/9/2026, 7:37:05 PM
+// Last updated: 3/9/2026, 7:40:06 PM
 1class Solution {
 2    public int makeConnected(int n, int[][] connections) {
 3        if(connections.length < n-1) return -1;
@@ -27,12 +27,15 @@
 26    }
 27
 28    void dfs(int node,ArrayList<ArrayList<Integer>> adj,boolean[] vis){
-29        vis[node]=true;
-30
-31        for(int it:adj.get(node)){
-32            if(!vis[it]){
-33                dfs(it,adj,vis);
-34            }
-35        }
-36    }
-37}
+29        if(vis[node]){
+30            return;
+31        }
+32        vis[node]=true;
+33
+34        for(int it:adj.get(node)){
+35            if(!vis[it]){
+36                dfs(it,adj,vis);
+37            }
+38        }
+39    }
+40}
