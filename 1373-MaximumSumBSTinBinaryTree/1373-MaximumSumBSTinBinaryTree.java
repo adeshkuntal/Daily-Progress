@@ -1,4 +1,4 @@
-// Last updated: 3/4/2026, 7:49:49 PM
+// Last updated: 3/11/2026, 11:52:36 AM
 1/**
 2* Definition for a binary tree node.
 3* public class TreeNode {
@@ -16,34 +16,30 @@
 15*/
 16
 17class Solution {
-18    int ans;
+18    int ans = 0;
 19    public int maxSumBST(TreeNode root) {
-20        ans = 0;
-21        dfs(root);
-22        return ans;
-23    }
-24
-25    // Returns: [minValue, maxValue, sumOfSubtree]
-26    private int[] dfs(TreeNode root) {
-27        if (root == null) {
-28            return new int[]{Integer.MAX_VALUE, Integer.MIN_VALUE, 0};
-29        }
-30
-31        int[] leftSubtree = dfs(root.left);
-32        int[] rightSubtree = dfs(root.right);
-33
-34        // Check BST validity
-35        if (root.val > leftSubtree[1] && root.val < rightSubtree[0]) {
-36            int currSum = leftSubtree[2] + rightSubtree[2] + root.val;
-37            ans = Math.max(ans, currSum);
+20        dfs(root);
+21        return ans;
+22    }
+23
+24    // Returns: [maxValue, minValue, sumOfSubtree]
+25    private int[] dfs(TreeNode root) {
+26        if(root == null){
+27            return new int[]{Integer.MIN_VALUE,Integer.MAX_VALUE,0};
+28        }
+29        int[] left = dfs(root.left);
+30        int[] right = dfs(root.right);
+31
+32        if(root.val > left[0] && root.val<right[1]){
+33            int curr = left[2]+right[2]+root.val;
+34            ans = Math.max(ans,curr);
+35
+36            int minValue = Math.min(root.val,left[1]);
+37            int maxValue = Math.max(root.val,right[0]);
 38
-39            int minValue = Math.min(root.val, leftSubtree[0]);
-40            int maxValue = Math.max(root.val, rightSubtree[1]);
+39            return new int[]{maxValue,minValue,curr};
+40        }
 41
-42            return new int[]{minValue, maxValue, currSum};
-43        }
-44
-45        // Mark subtree as invalid BST
-46        return new int[]{Integer.MIN_VALUE, Integer.MAX_VALUE, 0};
-47    }
-48}
+42        return new int[]{Integer.MAX_VALUE,Integer.MIN_VALUE,0};
+43    }
+44}
