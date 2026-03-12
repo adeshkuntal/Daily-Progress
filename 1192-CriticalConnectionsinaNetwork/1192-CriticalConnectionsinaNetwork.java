@@ -1,19 +1,14 @@
-// Last updated: 3/12/2026, 9:55:40 PM
+// Last updated: 3/12/2026, 10:11:22 PM
 1class Solution {
-2    public int maxProfit(int[] prices) {
-3        int buy1 = Integer.MAX_VALUE;
-4        int buy2 = Integer.MAX_VALUE;
-5        int sell1 = 0;
-6        int sell2 = 0;
-7
-8        for(int price : prices){
-9            buy1 = Math.min(buy1, price);
-10            sell1 = Math.max(sell1, price - buy1);
-11
-12            buy2 = Math.min(buy2, price - sell1);
-13            sell2 = Math.max(sell2, price - buy2);
-14        }
-15
-16        return sell2;
-17    }
-18}
+2    public void sortColors(int[] nums) {
+3        for(int j=0; j<nums.length; j++){
+4            for(int i=1; i<nums.length; i++){
+5                if(nums[i] < nums[i-1]){
+6                    int temp = nums[i];
+7                    nums[i] = nums[i-1];
+8                    nums[i-1] = temp;
+9                }
+10            }
+11        }
+12    }
+13}
