@@ -1,38 +1,27 @@
-// Last updated: 8/4/2025, 6:58:22 PM
-class Solution {
-    public void nextPermutation(int[] arr) {
-        int n = arr.length;
-        int p = -1;
-        int q =  -1;
-        for(int i=n-2; i>=0; i--){
-            if(arr[i] < arr[i+1]){
-                p = i;
-                break;
-            }
-        }
-        if(p == -1){
-            Reverse(arr,0,n-1);
-            return;
-        }
-        for(int i=n-1; i>=p ;i--){
-            if(arr[i] > arr[p]){
-                q = i;
-                break;
-            }
-        }
-//        swap p and q
-        int temp = arr[p];
-        arr[p] = arr[q];
-        arr[q] = temp;
-        Reverse(arr,p+1,n-1);
-    }
-    public static void Reverse(int[] arr,int i,int j) {
-        while(i<j) {
-            int tem=arr[i];
-            arr[i]=arr[j];
-            arr[j]=tem;
-            i++;
-            j--;
-        } 
-    }
-}
+// Last updated: 3/13/2026, 7:04:26 PM
+1import java.util.*;
+2
+3class Solution {
+4    public int[][] merge(int[][] intervals) {
+5        Arrays.sort(intervals,(a,b)->a[0]-b[0]);
+6
+7        ArrayList<int[]> res = new ArrayList<>();
+8
+9        int start = intervals[0][0];
+10        int end = intervals[0][1];
+11
+12        for(int i=1;i<intervals.length;i++){
+13            if(intervals[i][0] <= end){
+14                end = Math.max(end,intervals[i][1]);
+15            }else{
+16                res.add(new int[]{start,end});
+17                start = intervals[i][0];
+18                end = intervals[i][1];
+19            }
+20        }
+21
+22        res.add(new int[]{start,end});
+23
+24        return res.toArray(new int[res.size()][]);
+25    }
+26}
