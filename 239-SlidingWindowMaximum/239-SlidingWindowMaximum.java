@@ -1,4 +1,4 @@
-// Last updated: 3/14/2026, 4:27:08 PM
+// Last updated: 3/14/2026, 4:27:38 PM
 1import java.util.*;
 2
 3class Solution {
@@ -38,3 +38,25 @@
 37    }
 38}
 39
+40
+41
+42
+43
+44
+45// class Solution {
+46//     public int[] maxSlidingWindow(int[] nums, int k) {
+47//         List<Integer> ans = new ArrayList<>();
+48//         for(int i=0; i<=nums.length-k; i++){
+49//             int curr = nums[i];
+50//             for(int j=i; j<k+i; j++){
+51//                 curr = Math.max(curr,nums[j]);
+52//             }
+53//             ans.add(curr);
+54//         }
+55//         int[] res = new int[ans.size()];
+56//         for(int i=0; i<ans.size(); i++){
+57//             res[i] = ans.get(i);
+58//         }
+59//         return res;
+60//     }
+61// }
