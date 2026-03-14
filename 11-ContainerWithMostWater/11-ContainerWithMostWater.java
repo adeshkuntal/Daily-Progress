@@ -1,4 +1,4 @@
-// Last updated: 3/14/2026, 2:59:52 PM
+// Last updated: 3/14/2026, 3:00:34 PM
 1class Solution {
 2    public int maxArea(int[] h) {
 3        int left = 0;
