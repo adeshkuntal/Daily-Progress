@@ -1,40 +1,31 @@
-// Last updated: 8/4/2025, 6:55:24 PM
-class Solution {
-    public int compress(char[] chars) {
-        int index = 0; // Position to insert characters in the compressed array
-        int i = 0; // Iterator for the original array
-
-        while (i < chars.length) {
-            char currentChar = chars[i];
-            int count = 0;
-
-            // Count consecutive characters
-            while (i < chars.length && chars[i] == currentChar) {
-                i++;
-                count++;
-            }
-
-            chars[index++] = currentChar; // Add character to the compressed array
-
-            // Add count if greater than 1
-            if (count > 1) {
-                for (char c : Integer.toString(count).toCharArray()) {
-                    chars[index++] = c;
-                }
-            }
-        }
-
-        return index; // New length of the compressed array
-    }
-
-    public static void main(String[] args) {
-        Solution sol = new Solution();
-        char[] chars = {'a', 'a', 'b', 'b', 'c', 'c', 'c'};
-        int newLength = sol.compress(chars);
-
-        // Print the compressed array
-        for (int i = 0; i < newLength; i++) {
-            System.out.print(chars[i] + " ");
-        }
-    }
-}
+// Last updated: 3/16/2026, 8:07:19 PM
+1class Solution {
+2    public int compress(char[] chars) {
+3        String s = "";
+4        char x = chars[0];
+5        int count = 1;
+6        for(int i=1; i<chars.length; i++){
+7            if(chars[i] == x){
+8                count++;
+9            }
+10            else{
+11                s += x;
+12                if(count > 1){
+13                    s += count;
+14                }
+15                x = chars[i];
+16                count = 1;
+17            }
+18        }
+19        s += x;
+20        if(count > 1){
+21            s += count;
+22        }
+23
+24        for(int i=0;i<s.length();i++){
+25            chars[i] = s.charAt(i);
+26        }
+27
+28        return s.length();
+29    }
+30}
