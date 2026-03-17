@@ -1,25 +1,26 @@
-// Last updated: 10/3/2025, 10:12:00 PM
-class Solution {
-    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        List<List<Integer>> result = new ArrayList<>();
-        Arrays.sort(candidates);
-        backtrack(candidates, target, 0, new ArrayList<>(), result);
-        return result;
-    }
-
-    private void backtrack(int[] candidates, int target, int start, List<Integer> temp, List<List<Integer>> result) {
-        if (target == 0) {
-            result.add(new ArrayList<>(temp));
-            return;
-        }
-
-        for (int i = start; i < candidates.length; i++) {
-            if (i > start && candidates[i] == candidates[i - 1]) continue; 
-            if (candidates[i] > target) break;
-
-            temp.add(candidates[i]);
-            backtrack(candidates, target - candidates[i], i + 1, temp, result);
-            temp.remove(temp.size() - 1);
-        }
-    }
-}
+// Last updated: 3/17/2026, 7:04:32 PM
+1class Solution {
+2    public List<List<Integer>> combinationSum2(int[] c, int target) {
+3        List<List<Integer>> res = new ArrayList<>();
+4        Arrays.sort(c);
+5        fn(res, new ArrayList<>(), c, target, 0);
+6        return res;
+7    }
+8
+9    public void fn(List<List<Integer>> res, ArrayList<Integer> temp, int[] c, int target, int idx){
+10        if(target == 0){
+11            res.add(new ArrayList<>(temp));
+12            return;
+13        }
+14
+15        for(int i = idx; i < c.length; i++){
+16            if(i > idx && c[i] == c[i-1]) continue;
+17
+18            if(c[i] > target) break;
+19
+20            temp.add(c[i]);
+21            fn(res, temp, c, target - c[i], i + 1);
+22            temp.remove(temp.size() - 1);
+23        }
+24    }
+25}
