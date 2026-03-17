@@ -1,22 +1,20 @@
-// Last updated: 10/11/2025, 9:17:40 PM
-class Solution {
-    public List<List<Integer>> combinationSum(int[] coin, int target) {
-        List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> l= new ArrayList<>();
-        combination(coin,target,l,0,ans);
-        return ans;
-    }
-    public static void combination(int[] coin,int target,List<Integer> l,int idx,List<List<Integer>> ans){
-        if(target==0){
-            ans.add(new ArrayList<>(l));
-            return;
-        }
-        for(int i=idx; i< coin.length; i++){
-            if(target>=coin[i]){
-                l.add(coin[i]);
-                combination(coin,target-coin[i],l,i,ans);
-                l.remove(l.size()-1);
-            }
-        }
-    }
-}
+// Last updated: 3/17/2026, 6:48:57 PM
+1class Solution {
+2    public List<List<Integer>> combinationSum(int[] c, int target) {
+3        List<List<Integer>> res = new ArrayList<>();
+4        fn(res,new ArrayList<>(),c,target,0,0);
+5        return res;
+6    }
+7    public void fn(List<List<Integer>> res,ArrayList<Integer> temp,int[] c,int target,int idx,int sum){
+8        if(target == sum){
+9            res.add(new ArrayList<>(temp));
+10            return;
+11        }
+12        if(sum > target) return;
+13        for(int i=idx; i<c.length; i++){
+14            temp.add(c[i]);
+15            fn(res,temp,c,target,i,sum+c[i]);
+16            temp.remove(temp.size()-1);
+17        }
+18    }
+19}
