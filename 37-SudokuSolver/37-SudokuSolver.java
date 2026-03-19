@@ -1,48 +1,48 @@
-// Last updated: 1/8/2026, 1:23:05 PM
+// Last updated: 3/19/2026, 12:29:13 PM
 1class Solution {
-2    public void solveSudoku(char[][] board) {
-3        fill_sudoku(board, 0, 0);
-4    }
+2    boolean[][] row = new boolean[9][10];
+3    boolean[][] col = new boolean[9][10];
+4    boolean[][] box = new boolean[9][10];
 5
-6    public boolean fill_sudoku(char[][] board, int row, int col) {
-7        if (row == 9) return true;
-8
-9        if (col == 9) {
-10            return fill_sudoku(board, row + 1, 0);
-11        }
-12
-13        if (board[row][col] != '.') {
-14            return fill_sudoku(board, row, col + 1);
-15        }
-16
-17        for (int i = 1; i <= 9; i++) {
-18            char ch = (char)(i + '0');
-19            if (isSafe(board, row, col, ch)) {
-20                board[row][col] = ch;
-21                if (fill_sudoku(board, row, col + 1)){
-22                    return true;
-23                }
-24                board[row][col] = '.';
-25            }
-26        }
-27        return false;
-28    }
-29
-30    public boolean isSafe(char[][] board, int row, int col, char val) {
-31        for (int i = 0; i < 9; i++) {
-32            if (board[row][i] == val) return false;
-33            if (board[i][col] == val) return false;
-34        }
-35
-36        int sr = (row / 3) * 3;
-37        int sc = (col / 3) * 3;
-38
-39        for (int i = sr; i < sr + 3; i++) {
-40            for (int j = sc; j < sc + 3; j++) {
-41                if (board[i][j] == val) return false;
+6    public void solveSudoku(char[][] board) {
+7
+8        for(int i=0;i<9;i++){
+9            for(int j=0;j<9;j++){
+10                if(board[i][j] != '.'){
+11                    int num = board[i][j]-'0';
+12                    row[i][num] = true;
+13                    col[j][num] = true;
+14                    box[(i/3)*3 + j/3][num] = true;
+15                }
+16            }
+17        }
+18
+19        fill(board,0,0);
+20    }
+21
+22    public boolean fill(char[][] board,int r,int c){
+23        if(r==9) return true;
+24
+25        if(c==9) return fill(board,r+1,0);
+26
+27        if(board[r][c] != '.'){
+28            return fill(board,r,c+1);
+29        }
+30
+31        for(int num=1;num<=9;num++){
+32            int b = (r/3)*3 + c/3;
+33
+34            if(!row[r][num] && !col[c][num] && !box[b][num]){
+35                board[r][c] = (char)(num+'0');
+36                row[r][num] = col[c][num] = box[b][num] = true;
+37
+38                if(fill(board,r,c+1)) return true;
+39
+40                board[r][c] = '.';
+41                row[r][num] = col[c][num] = box[b][num] = false;
 42            }
 43        }
-44        return true;
-45    }
-46}
-47
+44
+45        return false;
+46    }
+47}
