@@ -1,28 +1,20 @@
-// Last updated: 3/20/2026, 5:36:37 PM
-1import java.util.*;
-2
-3class Solution {
-4    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-5        Stack<Integer> st = new Stack<>();
-6        HashMap<Integer, Integer> map = new HashMap<>();
-7        
-8        for(int i = 0; i < nums2.length; i++){
-9            while(!st.isEmpty() && nums2[i] > st.peek()){
-10                map.put(st.pop(), nums2[i]);
-11            }
-12            st.push(nums2[i]);
-13        }
-14        
-15        while(!st.isEmpty()){
-16            map.put(st.pop(), -1);
-17        }
-18        
-19        int[] ans = new int[nums1.length];
-20        
-21        for(int i = 0; i < nums1.length; i++){
-22            ans[i] = map.get(nums1[i]);
-23        }
-24        
-25        return ans;
-26    }
-27}
+// Last updated: 3/20/2026, 5:45:17 PM
+1class Solution {
+2    public boolean isValid(String s) {
+3        Stack<Character> stack = new Stack<>();
+4        for (char c : s.toCharArray()) {
+5            if (c == '(' || c == '{' || c == '[') {
+6                stack.push(c);
+7            } else {
+8                if (stack.isEmpty()) return false;
+9                char top = stack.pop();
+10                if ((c == ')' && top != '(') || 
+11                    (c == '}' && top != '{') || 
+12                    (c == ']' && top != '[')) {
+13                    return false;
+14                }
+15            }
+16        }
+17        return stack.isEmpty();
+18    }
+19}
