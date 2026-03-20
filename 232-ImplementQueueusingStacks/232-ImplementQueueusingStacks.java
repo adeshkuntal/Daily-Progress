@@ -1,4 +1,4 @@
-// Last updated: 3/20/2026, 5:22:03 PM
+// Last updated: 3/20/2026, 5:22:25 PM
 1class MyQueue {
 2    Stack<Integer> s1;
 3    Stack<Integer> s2;
