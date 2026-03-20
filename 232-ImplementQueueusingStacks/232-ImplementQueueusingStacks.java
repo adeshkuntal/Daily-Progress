@@ -1,41 +1,28 @@
-// Last updated: 3/20/2026, 5:22:25 PM
-1class MyQueue {
-2    Stack<Integer> s1;
-3    Stack<Integer> s2;
-4
-5    public MyQueue() {
-6        s1 = new Stack<>();
-7        s2 = new Stack<>();
-8    }
-9    
-10    public void push(int x) {
-11        while(!s1.isEmpty()){
-12            s2.add(s1.pop());
+// Last updated: 3/20/2026, 5:32:34 PM
+1import java.util.*;
+2
+3class Solution {
+4    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+5        Stack<Integer> st = new Stack<>();
+6        HashMap<Integer, Integer> map = new HashMap<>();
+7        
+8        for(int i = 0; i < nums2.length; i++){
+9            while(!st.isEmpty() && nums2[i] > st.peek()){
+10                map.put(st.pop(), nums2[i]);
+11            }
+12            st.push(nums2[i]);
 13        }
-14        s1.add(x);
-15        while(!s2.isEmpty()){
-16            s1.add(s2.pop());
+14        
+15        while(!st.isEmpty()){
+16            map.put(st.pop(), -1);
 17        }
-18    }
-19    
-20    public int pop() {
-21        return s1.pop();
-22    }
-23    
-24    public int peek() {
-25        return s1.peek();
+18        
+19        int[] ans = new int[nums1.length];
+20        
+21        for(int i = 0; i < nums1.length; i++){
+22            ans[i] = map.get(nums1[i]);
+23        }
+24        
+25        return ans;
 26    }
-27    
-28    public boolean empty() {
-29        return s1.isEmpty();
-30    }
-31}
-32
-33/**
-34 * Your MyQueue object will be instantiated and called as such:
-35 * MyQueue obj = new MyQueue();
-36 * obj.push(x);
-37 * int param_2 = obj.pop();
-38 * int param_3 = obj.peek();
-39 * boolean param_4 = obj.empty();
-40 */
+27}
