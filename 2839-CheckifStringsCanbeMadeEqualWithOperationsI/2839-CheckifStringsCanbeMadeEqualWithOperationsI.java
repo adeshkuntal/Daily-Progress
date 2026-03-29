@@ -1,4 +1,4 @@
-// Last updated: 3/29/2026, 10:55:40 AM
+// Last updated: 3/29/2026, 10:56:13 AM
 1class Solution {
 2    public boolean canBeEqual(String s1, String s2) {
 3        char[] arr1 = s1.toCharArray();
