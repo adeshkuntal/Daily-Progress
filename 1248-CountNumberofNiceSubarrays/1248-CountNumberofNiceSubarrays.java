@@ -1,4 +1,4 @@
-// Last updated: 4/1/2026, 12:15:17 PM
+// Last updated: 4/3/2026, 10:08:53 PM
 1class Solution {
 2    public int numberOfSubarrays(int[] nums, int k) {
 3        return helper(nums, k) - helper(nums, k - 1);
