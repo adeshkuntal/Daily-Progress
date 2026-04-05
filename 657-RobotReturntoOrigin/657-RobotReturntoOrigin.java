@@ -1,23 +1,17 @@
-// Last updated: 4/5/2026, 12:34:08 PM
+// Last updated: 4/5/2026, 12:34:48 PM
 1class Solution {
 2    public boolean judgeCircle(String moves) {
-3        int vertical = 0; // Tracks vertical movement
-4        int horizontal = 0; // Tracks horizontal movement
+3        int x = 0;
+4        int y = 0;
 5
-6        for (int i = 0; i < moves.length(); i++) {
+6        for(int i = 0; i < moves.length(); i++){
 7            char ch = moves.charAt(i);
-8            if (ch == 'U') {
-9                vertical += 1;
-10            } else if (ch == 'D') {
-11                vertical -= 1;
-12            } else if (ch == 'R') {
-13                horizontal += 1;
-14            } else if (ch == 'L') {
-15                horizontal -= 1;
-16            }
-17        }
-18
-19        // If both vertical and horizontal sums are zero, robot returns to origin
-20        return vertical == 0 && horizontal == 0;
-21    }
-22}
+8            if(ch == 'R') x++;
+9            else if(ch == 'L') x--;
+10            else if(ch == 'U') y++;
+11            else y--;
+12        }
+13
+14        return x == 0 && y == 0;
+15    }
+16}
